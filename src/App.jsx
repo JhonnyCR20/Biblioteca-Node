@@ -1,0 +1,23 @@
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Inicio/navbar'
+import Home from './components/Inicio/home'
+import AutoresPage from './components/autores/AutoresPage'
+import LibrosPage from './components/libros/LibrosPage'
+
+function App() {
+  return (
+    <div className="app">
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/autores" element={<AutoresPage />} />
+          <Route path="/libros" element={<LibrosPage />} />
+        </Routes>
+      </main>
+    </div>
+  )
+}
+
+export default App

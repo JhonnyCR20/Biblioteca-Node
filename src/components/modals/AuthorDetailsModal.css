@@ -1,0 +1,107 @@
+/* Styles specific to the AuthorDetailsModal - now fully unique */
+.author-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.author-details-modal-content {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%;
+    max-width: 500px;
+    border: none;
+}
+
+.author-details-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0;
+    border: none;
+}
+
+.author-details-modal-edit-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+}
+
+.edit-icon {
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+.author-details-modal-body {
+    margin-bottom: 20px;
+}
+
+.author-details-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
+    border: none;
+}
+
+.author-details-modal-delete-button, .author-details-modal-close-button {
+    width: 100px;
+    height: 40px;
+    padding: 8px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: 0;
+    border: none;
+}
+
+.author-details-modal-delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.author-details-modal-delete-button:hover {
+    background-color: #a71d2a;
+    color: #f8f9fa;
+}
+
+.author-details-modal-close-button {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.author-details-modal-close-button:hover {
+    background-color: #0056b3;
+    color: white;
+}

@@ -1,0 +1,110 @@
+/* Fondo general igual al de autores */
+.libros-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+/* Ajuste para que el contenedor ocupe el 100% del ancho y se centre visualmente */
+.libros-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: #222;
+}
+
+.libros-table-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto 0 auto;
+    padding-bottom: 20px;
+}
+
+.libros-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.libros-table th {
+    background-color: #f0f4f8;
+    color: #333;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.libros-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    color: #333;
+}
+
+.libros-table td:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.libros-table th:last-child {
+    text-align: right;
+    padding-right: 35px;
+}
+
+.libros-button {
+    padding: 10px 50px;
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.libros-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.crear-libro-container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+    margin: 20px auto 0 auto;
+}
+
+.crear-libro-button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 90px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.crear-libro-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 900px) {
+  .libros-container {
+    padding: 100px 10px 24px 10px;
+    max-width: 98vw;
+  }
+}

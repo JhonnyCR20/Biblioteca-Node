@@ -1,0 +1,192 @@
+/* Complementar estilos de Bootstrap para la página de autores */
+.autores-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the top */
+    min-height: 100vh;
+    width: 100vw; /* Ensure full viewport width */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+}
+
+.autores-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Ensure autores-table is responsive and centered */
+.autores-table {
+    width: 100%; /* Use full width of the container */
+    max-width: 1200px; /* Limit maximum width for better readability */
+    border-collapse: collapse;
+    margin: 20px auto; /* Center the table horizontally */
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.autores-table th {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #0056b3;
+}
+
+.autores-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    color: #333; /* Dark text color */
+}
+
+/* Align the actions column to the right */
+.autores-table td:last-child {
+    text-align: right; /* Align text in the last column to the right */
+    padding-right: 10px; /* Reduce right padding to move content slightly left */
+}
+
+.autores-table th:last-child {
+    text-align: right; /* Align header text in the last column to the right */
+    padding-right: 35px; /* Reduce right padding to move header slightly left */
+}
+
+/* Adjusted button styles to make it longer */
+.autores-button {
+    padding: 10px 50px; /* Increased horizontal padding */
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px; /* Increased font size */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.autores-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.crear-autor {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px; /* Align with table width */
+    text-align: center;
+}
+
+.crear-autor-input {
+    margin: 10px 5px; /* Add consistent spacing */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: calc(45% - 10px); /* Adjust width for better alignment */
+}
+
+/* Style for the 'Crear' button below the table */
+.crear-autor-button {
+    display: block;
+    margin: 20px auto; /* Center the button horizontally */
+    padding: 15px 90px; /* Adjust padding for larger button */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.crear-autor-button:hover {
+    background-color: #0056b3;
+}
+
+/* Adjusted modal styles for better centering and responsiveness */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #f9f9f9; /* Light gray background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%; /* Reduce width */
+    max-width: 400px; /* Limit maximum width */
+}
+
+/* Updated styles for modal inputs and labels */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555; /* Dark gray text */
+}
+
+.form-control {
+    background-color: #f0f0f0; /* Light gray input background */
+    color: #333; /* Dark text */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Adjusted button styles to match the provided image */
+.modal-save-button {
+    margin-top: 20px;
+    padding: 15px 20px; /* Increased padding for larger buttons */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    width: 100%; /* Full width */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-save-button:hover {
+    background-color: #0056b3;
+}
+
+.modal-close-button {
+    margin-top: 10px;
+    padding: 15px 20px; /* Increased padding for larger buttons */
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    width: 100%; /* Full width */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-close-button:hover {
+    background-color: #c82333;
+}
+
+.modal-content h2 {
+    color: #333; /* Dark text for modal title */
+}
