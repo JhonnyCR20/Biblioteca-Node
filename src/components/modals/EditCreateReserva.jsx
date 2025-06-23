@@ -1,41 +1,41 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './EditCreateReserva.css';
+import './css/EditCreateReserva.css';
 import { obtenerLibros, obtenerLectores } from '../../services/datosService';
 
-const EditCreateReserva = ({ initialData, onClose, onSave, isEdit = false }) => {    // Función para formatear fecha para input date
-    const formatearFechaParaInput = (fecha) => {
+const EditCreateReserva = ({ initialData, onClose, onSave, isEdit = false }) => {
+    // Función simple para convertir fecha del servidor (YYYY-MM-DD) al input date
+    const convertirFechaParaInput = (fecha) => {
         if (!fecha) return '';
-        
-        // Si la fecha viene en formato 'YYYY-MM-DD', la usamos directamente
+        // Si ya está en formato YYYY-MM-DD, devolverla tal como está
         if (typeof fecha === 'string' && fecha.match(/^\d{4}-\d{2}-\d{2}$/)) {
             return fecha;
         }
+        return '';
+    };    // Función simple para convertir fecha del input (YYYY-MM-DD) al servidor
+    const convertirFechaParaServidor = (fecha) => {
+        if (!fecha) return '';
         
-        // Si la fecha viene en formato DD/MM/YYYY (como se muestra en la tabla)
-        if (typeof fecha === 'string' && fecha.includes('/')) {
-            const [day, month, year] = fecha.split('/');
-            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-        }
-        
-        // Para otros formatos, convertir evitando problemas de zona horaria
         try {
-            // Crear fecha en hora local para evitar desfases de zona horaria
-            const fechaStr = fecha.toString();
-            const fechaObj = new Date(fechaStr + (fechaStr.includes('T') ? '' : 'T00:00:00'));
+            // Crear fecha y sumar un día para compensar el desfase
+            const fechaObj = new Date(fecha + 'T00:00:00'); // Asegurar hora local
+            fechaObj.setDate(fechaObj.getDate() + 1); // Sumar un día
             
+            // Convertir de vuelta a formato YYYY-MM-DD
             const year = fechaObj.getFullYear();
             const month = String(fechaObj.getMonth() + 1).padStart(2, '0');
             const day = String(fechaObj.getDate()).padStart(2, '0');
             
             return `${year}-${month}-${day}`;
         } catch (error) {
-            console.error('Error al formatear fecha:', error);
-            return '';
+            console.error('Error al ajustar fecha:', error);
+            return fecha; // Devolver la fecha original si hay error
         }
-    };const [formData, setFormData] = useState({
+    };
+
+    const [formData, setFormData] = useState({
         id_libro: initialData?.id_libro || '',
         id_lector: initialData?.id_lector || '',
-        fecha_reserva: formatearFechaParaInput(initialData?.fecha_reserva) || '',
+        fecha_reserva: convertirFechaParaInput(initialData?.fecha_reserva) || '',
         estado: initialData?.estado || 'Activa',
     });
     
@@ -43,23 +43,14 @@ const EditCreateReserva = ({ initialData, onClose, onSave, isEdit = false }) => 
     const [libros, setLibros] = useState([]);
     const [lectores, setLectores] = useState([]);
     const [loading, setLoading] = useState(true);    const modalRef = useRef(null);    // Actualizar formData cuando cambie initialData
-    useEffect(() => {        if (initialData && isEdit) {
-            console.log('Initial data recibida:', initialData);
-            console.log('Estado inicial:', initialData.estado);
-            console.log('Fecha original en initialData:', initialData.fecha_reserva);
-            
-            const fechaFormateada = formatearFechaParaInput(initialData.fecha_reserva);
-            console.log('Fecha formateada para input:', fechaFormateada);
-            
-            const newFormData = {
+    useEffect(() => {
+        if (initialData && isEdit) {
+            setFormData({
                 id_libro: initialData.id_libro || '',
                 id_lector: initialData.id_lector || '',
-                fecha_reserva: fechaFormateada,
+                fecha_reserva: convertirFechaParaInput(initialData.fecha_reserva) || '',
                 estado: initialData.estado || 'Activa',
-            };
-            console.log('Form data establecido:', newFormData);
-            console.log('Estado en form data:', newFormData.estado);
-            setFormData(newFormData);
+            });
         }
     }, [initialData, isEdit]);
     
@@ -98,18 +89,12 @@ const EditCreateReserva = ({ initialData, onClose, onSave, isEdit = false }) => 
         
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
-    };
-      const handleChange = (e) => {
+    };    const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(`Campo ${name} cambiado a:`, value);
-        setFormData(prev => {
-            const newData = {
-                ...prev,
-                [name]: value
-            };
-            console.log('Nuevo formData:', newData);
-            return newData;
-        });
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
         
         // Limpiar error cuando se modifica el campo
         if (errors[name]) {
@@ -118,17 +103,16 @@ const EditCreateReserva = ({ initialData, onClose, onSave, isEdit = false }) => 
                 [name]: null
             }));
         }
-    };const handleSubmit = (e) => {
+    };    const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            // Convertir los IDs a números
+            // Convertir los IDs a números y manejar la fecha
             const dataToSend = {
                 ...formData,
                 id_libro: parseInt(formData.id_libro),
-                id_lector: parseInt(formData.id_lector)
+                id_lector: parseInt(formData.id_lector),
+                fecha_reserva: convertirFechaParaServidor(formData.fecha_reserva)
             };
-            console.log('Datos del formulario a enviar:', dataToSend);
-            console.log('Es modo edición:', isEdit);
             onSave(dataToSend);
         }
     };
@@ -205,10 +189,11 @@ const EditCreateReserva = ({ initialData, onClose, onSave, isEdit = false }) => 
                                     value={formData.estado}
                                     onChange={handleChange}
                                     className={errors.estado ? 'error' : 'form-control'}                                >
-                                    <option value="Activa">Activa</option>
+                                    <option value="Seleccione">Seleccione</option>
                                     <option value="Cancelada">Cancelada</option>
                                     <option value="Completada">Completada</option>
                                     <option value="Expirada">Expirada</option>
+                                    <option value="Pendiente">Pendiente</option>
                                 </select>
                                 {errors.estado && <div className="error-message">{errors.estado}</div>}
                             </div>

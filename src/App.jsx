@@ -7,6 +7,7 @@ import LibrosPage from './components/libros/LibrosPage'
 import EditorialesPage from './components/editoriales/EditorialesPage'
 import CategoriasPage from './components/categorias/CategoriasPage'
 import ReservasPage from './components/reservas/ReservasPage'
+import LectoresPage from './components/lectores/LectoresPage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/editoriales" element={<EditorialesPage />} />
           <Route path="/categorias" element={<CategoriasPage />} />
           <Route path="/reservas" element={<ReservasPage />} />
+          <Route path="/lectores" element={<LectoresPage />} />
         </Routes>
       </main>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './EditCreateGenero.css';
+import './css/EditCreateGenero.css';
 
 const EditCreateGenero = ({ initialData, onClose, onSave, isEdit = false }) => {    const [formData, setFormData] = useState({
         nombre: initialData?.nombre || '',
@@ -61,6 +61,7 @@ const EditCreateGenero = ({ initialData, onClose, onSave, isEdit = false }) => {
                             value={formData.nombre}
                             onChange={handleChange}
                             className={errors.nombre ? 'error' : 'form-control'}
+                            maxLength="35"
                         />
                         {errors.nombre && <div className="error-message">{errors.nombre}</div>}
                     </div>
@@ -75,7 +76,11 @@ const EditCreateGenero = ({ initialData, onClose, onSave, isEdit = false }) => {
                             className="form-control"
                             rows="3"
                             placeholder="Descripción de la categoría (opcional)"
+                            maxLength="35"
                         />
+                        <small style={{ color: '#666', fontSize: '12px' }}>
+                            {formData.descripcion.length}/35 caracteres
+                        </small>
                     </div>
                     
                     <div className="edit-create-genero-actions">

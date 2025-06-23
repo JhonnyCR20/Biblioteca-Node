@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './EditCreateEditorial.css';
+import './css/EditCreateEditorial.css';
 
 const EditCreateEditorial = ({ initialData, onClose, onSave, isEdit = false }) => {
     const [formData, setFormData] = useState({
@@ -55,8 +55,7 @@ const EditCreateEditorial = ({ initialData, onClose, onSave, isEdit = false }) =
                     <h2>{isEdit ? 'Editar Editorial' : 'Crear Editorial'}</h2>
                 </div>
                 
-                <form onSubmit={handleSubmit} className="edit-create-editorial-form">
-                    <div className="form-group">
+                <form onSubmit={handleSubmit} className="edit-create-editorial-form">                    <div className="form-group">
                         <label htmlFor="nombre">Nombre:</label>
                         <input
                             type="text"
@@ -65,6 +64,7 @@ const EditCreateEditorial = ({ initialData, onClose, onSave, isEdit = false }) =
                             value={formData.nombre}
                             onChange={handleChange}
                             className={errors.nombre ? 'error' : 'form-control'}
+                            maxLength="35"
                         />
                         {errors.nombre && <div className="error-message">{errors.nombre}</div>}
                     </div>
@@ -78,6 +78,7 @@ const EditCreateEditorial = ({ initialData, onClose, onSave, isEdit = false }) =
                             value={formData.pais}
                             onChange={handleChange}
                             className={errors.pais ? 'error' : 'form-control'}
+                            maxLength="35"
                         />
                         {errors.pais && <div className="error-message">{errors.pais}</div>}
                     </div>

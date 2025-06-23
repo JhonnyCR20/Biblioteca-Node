@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import './DeleteReservaModal.css';
+import './css/DeleteReservaModal.css';
 
 const DeleteReservaModal = ({ onClose, onDelete, reserva }) => {
     const modalRef = useRef(null);

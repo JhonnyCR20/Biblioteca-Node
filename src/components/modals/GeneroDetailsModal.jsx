@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './GeneroDetailsModal.css';
+import './css/GeneroDetailsModal.css';
 import EditCreateGenero from './EditCreateGenero';
 import DeleteGeneroModal from './DeleteGeneroModal';
 import editarIcon from '../../assets/editar.svg';

@@ -17,6 +17,7 @@
 
 /* Ajuste para que el contenedor ocupe el 100% del ancho y se centre visualmente */
 .libros-title {
+    margin-top: 34px;
     text-align: center;
     font-size: 2.2rem;
     font-weight: 700;

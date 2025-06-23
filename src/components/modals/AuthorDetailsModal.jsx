@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './AuthorDetailsModal.css';
+import './css/AuthorDetailsModal.css';
 import EditCreateAuthor from './EditCreateAuthor';
 import editarIcon from '../../assets/editar.svg';
 import DeleteAuthorModal from './DeleteAuthorModal';

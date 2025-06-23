@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './EditCreateAuthor.css';
+import './css/EditCreateAuthor.css';
 
 const EditCreateAuthor = ({ onClose, onSave, initialData = {} }) => {
     const [nombre, setNombre] = useState(initialData.nombre || '');
@@ -22,8 +22,7 @@ const EditCreateAuthor = ({ onClose, onSave, initialData = {} }) => {
     return (
         <div className="edit-create-modal" ref={modalRef} onClick={handleBackdropClick}>
             <div className="edit-create-modal-content">
-                <h2>{initialData && initialData.id_autor ? 'Editar Autor' : 'Crear Autor'}</h2>
-                <div className="form-group">
+                <h2>{initialData && initialData.id_autor ? 'Editar Autor' : 'Crear Autor'}</h2>                <div className="form-group">
                     <label htmlFor="nombre">Nombre</label>
                     <input
                         id="nombre"
@@ -32,6 +31,7 @@ const EditCreateAuthor = ({ onClose, onSave, initialData = {} }) => {
                         placeholder="Escribe aquí"
                         value={nombre}
                         onChange={(e) => setNombre(e.target.value)}
+                        maxLength="35"
                     />
                 </div>
                 <div className="form-group">
@@ -43,6 +43,7 @@ const EditCreateAuthor = ({ onClose, onSave, initialData = {} }) => {
                         placeholder="Escribe aquí"
                         value={nacionalidad}
                         onChange={(e) => setNacionalidad(e.target.value)}
+                        maxLength="35"
                     />
                 </div>
                 <button className="edit-create-modal-save-button" onClick={handleSave}>{initialData && initialData.id_autor ? 'Guardar' : 'Crear'}</button>

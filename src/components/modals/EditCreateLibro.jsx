@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './EditCreateLibro.css';
+import './css/EditCreateLibro.css';
 import { obtenerAutores } from '../../services/autoresService';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -90,8 +90,7 @@ const EditCreateLibro = ({ onClose, onSave, initialData = {}, autoresGlobal = []
         <div className="edit-create-libro-modal" ref={modalRef} onClick={handleBackdropClick}>
             <div className="edit-create-libro-modal-content">
                 <h2>{isEdit ? 'Editar Libro' : 'Crear Libro'}</h2>
-                <div className="edit-create-libro-modal-form-grid">
-                    <div className="form-group">
+                <div className="edit-create-libro-modal-form-grid">                    <div className="form-group">
                         <label htmlFor="titulo">Título</label>
                         <input
                             id="titulo"
@@ -100,6 +99,7 @@ const EditCreateLibro = ({ onClose, onSave, initialData = {}, autoresGlobal = []
                             placeholder="Escribe aquí"
                             value={titulo}
                             onChange={(e) => setTitulo(e.target.value)}
+                            maxLength="35"
                         />
                     </div>
                     <div className="form-group">

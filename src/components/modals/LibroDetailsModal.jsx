@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './LibroDetailsModal.css';
+import './css/LibroDetailsModal.css';
 import EditCreateLibro from './EditCreateLibro';
 import DeleteLibroModal from './DeleteLibroModal';
 import editarIcon from '../../assets/editar.svg';

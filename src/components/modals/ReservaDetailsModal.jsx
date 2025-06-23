@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import './ReservaDetailsModal.css';
+import './css/ReservaDetailsModal.css';
 import EditCreateReserva from './EditCreateReserva';
 import DeleteReservaModal from './DeleteReservaModal';
 import editarIcon from '../../assets/editar.svg';

@@ -1,0 +1,134 @@
+.delete-lector-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.delete-lector-content {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-lector-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.delete-lector-header h2 {
+    margin: 0;
+    color: #dc3545;
+    font-size: 1.5rem;
+}
+
+.delete-lector-body {
+    padding: 20px;
+}
+
+.delete-lector-body p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.lector-info {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    border-left: 4px solid #007bff;
+}
+
+.lector-info p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.warning-text {
+    color: #dc3545;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.delete-lector-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+.confirm-delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.confirm-delete-button:hover {
+    background-color: #c82333;
+}
+
+.cancel-delete-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.cancel-delete-button:hover {
+    background-color: #5a6268;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .delete-lector-content {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .delete-lector-header,
+    .delete-lector-body,
+    .delete-lector-actions {
+        padding: 15px;
+    }
+    
+    .delete-lector-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .delete-lector-body p {
+        font-size: 14px;
+    }
+    
+    .delete-lector-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .confirm-delete-button,
+    .cancel-delete-button {
+        width: 100%;
+        padding: 12px;
+    }
+}
