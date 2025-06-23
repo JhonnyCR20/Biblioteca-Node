@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './AuthorDetailsModal.css';
-import editarIcon from '../../assets/editar.svg';
 import EditCreateAuthor from './EditCreateAuthor';
+import editarIcon from '../../assets/editar.svg';
 import DeleteAuthorModal from './DeleteAuthorModal';
 
 const AuthorDetailsModal = ({ autor, onClose, onEdit, onDelete }) => {
@@ -39,9 +39,8 @@ const AuthorDetailsModal = ({ autor, onClose, onEdit, onDelete }) => {
             <div className="author-details-modal" ref={modalRef} onClick={handleBackdropClick}>
                 <div className="author-details-modal-content">
                     <div className="author-details-modal-header">
-                        <h2>Detalles del Autor</h2>
-                        <button className="author-details-modal-edit-button" onClick={handleEditClick}>
-                            <img src={editarIcon} alt="Editar" className="edit-icon" />
+                        <h2>Detalles del Autor</h2>                        <button className="author-details-modal-edit-button" onClick={handleEditClick} title="Editar">
+                            <img src={editarIcon} alt="Editar" className="author-edit-icon" style={{width: '40px', height: '40px'}} />
                         </button>
                     </div>
                     <div className="author-details-modal-body">

@@ -74,34 +74,33 @@ function AutoresPage() {
         } catch (error) {
             alert('Error al eliminar el autor');
         }
-    };
-
-    return (
-        <div className="autores-container" style={{ height: '100vh' }}>
+    };    return (
+        <div className="autores-container">
             <h1 className="autores-title">Gestión de Autores</h1>
-            <table className="autores-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Nacionalidad</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {autores.map((autor) => (
-                        <tr key={autor.id_autor}>
-                            <td>{autor.id_autor}</td>
-                            <td>{autor.nombre}</td>
-                            <td>{autor.nacionalidad}</td>
-                            <td>
-                                <button className="autores-button" onClick={() => handleVerAutor(autor.id_autor)}>Ver</button>
-                            </td>
+            <div className="autores-table-wrapper">
+                <table className="autores-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Nacionalidad</th>
+                            <th>Acciones</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className="crear-autor-container">
+                    </thead>
+                    <tbody>
+                        {autores.map((autor) => (
+                            <tr key={autor.id_autor}>
+                                <td>{autor.id_autor}</td>
+                                <td>{autor.nombre}</td>
+                                <td>{autor.nacionalidad}</td>
+                                <td>
+                                    <button className="autores-button" onClick={() => handleVerAutor(autor.id_autor)}>Ver</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>            <div className="crear-autor">
                 <button className="crear-autor-button" onClick={() => setMostrarCrearModal(true)}>Crear</button>
             </div>
             {mostrarCrearModal && (

@@ -1,0 +1,302 @@
+/* Estilos generales para prevenir scrolling horizontal */
+body, html {
+    max-width: 100%;
+    overflow-x: hidden;
+    
+}
+
+.editoriales-container {
+    padding: 20px;
+    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 92vh;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 60px;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.editoriales-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: #222;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.editoriales-table-wrapper {
+    width: 70%;
+    max-width: 100%;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 20px auto 0 auto;
+    padding-bottom: 0;
+    box-sizing: border-box;
+    position: relative;
+    height: 400px;
+}
+
+.editoriales-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    color: #333;
+    table-layout: fixed;
+}
+
+.editoriales-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: calc(100% - 8px); /* Compensar el ancho del scrollbar */
+    display: table;
+    table-layout: fixed;
+}
+
+.editoriales-table tbody {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 350px;
+    width: 100%;
+}
+
+/* Estilo personalizado para el scrollbar */
+.editoriales-table tbody::-webkit-scrollbar {
+    width: 8px;
+}
+
+.editoriales-table tbody::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.editoriales-table tbody::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.editoriales-table tbody::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+.editoriales-table th:first-child,
+.editoriales-table td:first-child {
+    padding-left: 20px;
+}
+
+/* Ajustar el top-radius del primer elemento th para que coincida con la tabla */
+.editoriales-table th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.editoriales-table th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.editoriales-table thead tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.editoriales-table tbody tr {
+    display: table;
+    width: calc(100% - 8px); /* Resta el ancho del scrollbar para alinear con el encabezado */
+    table-layout: fixed;
+}
+
+.editoriales-table th,
+.editoriales-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2f0fd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.editoriales-table th {
+    background-color: #f0f4f8;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding: 15px;
+    text-align: left;
+}
+
+.editoriales-table th:last-child {
+    text-align: right;
+    padding-right: 35px;
+}
+
+.editoriales-table td {
+    padding: 15px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+    color: #333;
+}
+
+.editoriales-table td:last-child {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.editoriales-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.editoriales-button {
+    padding: 8px 50px;
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    white-space: nowrap;
+}
+
+.editoriales-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.crear-editorial-container {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    margin: 20px auto 0 auto;
+}
+
+.crear-editorial-button {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 60px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 280px;
+    width: auto;
+}
+
+.crear-editorial-button:hover {
+    background-color: #0069d9;
+}
+
+@media (max-width: 768px) {
+    .editoriales-container {
+        padding: 15px 10px;
+        width: 100%;
+    }
+
+    .editoriales-table-wrapper {
+        width: 100%;
+        margin: 0 auto;
+        height: 380px;
+    }
+
+    .editoriales-table tbody {
+        height: 330px;
+    }
+
+    .editoriales-table th,
+    .editoriales-table td {
+        padding: 10px 8px;
+    }
+
+    .editoriales-button {
+        padding: 6px 20px;
+        font-size: 14px;
+    }
+
+    .crear-editorial-container {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .crear-editorial-button {
+        padding: 12px 50px;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .editoriales-title {
+        font-size: 1.8rem;
+    }
+    
+    .editoriales-table th,
+    .editoriales-table td {
+        padding: 8px 5px;
+        font-size: 14px;
+    }
+
+    .editoriales-button {
+        padding: 5px 15px;
+        font-size: 13px;
+    }
+}
+
+/* Definición de anchos de columna */
+.editoriales-table th:nth-child(1),
+.editoriales-table td:nth-child(1) {
+    width: 10%;
+}
+
+.editoriales-table th:nth-child(2),
+.editoriales-table td:nth-child(2) {
+    width: 50%;
+}
+
+.editoriales-table th:nth-child(3),
+.editoriales-table td:nth-child(3) {
+    width: 20%;
+}
+
+.editoriales-table th:nth-child(4),
+.editoriales-table td:nth-child(4) {
+    width: 20%;
+}
+
+.editoriales-table tbody tr:last-child td {
+    border-bottom: none;
+    padding-bottom: 20px;
+}
+
+.editoriales-table tbody::after {
+    content: "";
+    display: block;
+    height: 10px; /* Espacio adicional al final del scroll */
+}
+
+/* Asegurar compatibilidad con Firefox */
+@-moz-document url-prefix() {
+    .editoriales-table tbody {
+        width: 100%;
+        scrollbar-width: thin;
+    }
+    
+    .editoriales-table tbody tr {
+        width: 100%;
+    }
+    
+    .editoriales-table thead {
+        width: 100%;
+    }
+}

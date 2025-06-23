@@ -1,5 +1,4 @@
-/* Styles specific to the AuthorDetailsModal - now fully unique */
-.author-details-modal {
+.genero-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,10 +8,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 2000;
 }
 
-.author-details-modal-content {
+.genero-modal-content {
     background-color: white;
     color: black;
     padding: 20px;
@@ -24,7 +23,7 @@
     border: none;
 }
 
-.author-details-modal-header {
+.genero-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +32,14 @@
     border: none;
 }
 
-.author-details-modal-edit-button {
+.genero-modal-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.genero-modal-edit-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -41,75 +47,88 @@
     margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    box-shadow: none;
+    align-items: center;    box-shadow: none;
     transition: opacity 0.2s ease;
 }
 
-.author-details-modal-edit-button:hover {
+.genero-modal-edit-button:hover {
     opacity: 0.8;
 }
 
-.author-details-modal-edit-button .author-edit-icon {
+.genero-modal-edit-button .genero-edit-icon {
     width: 40px;
     height: 40px;
     min-width: 40px;
     min-height: 40px;
     object-fit: contain;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background: none;
-    box-shadow: none;
 }
 
-.author-details-modal-body {
+.genero-modal-body {
     margin-bottom: 20px;
 }
 
-.author-details-modal-footer {
+.genero-modal-body p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.genero-modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    align-items: center;
-    border: none;
+    margin-top: 20px;
 }
 
-.author-details-modal-delete-button, .author-details-modal-close-button {
-    width: 100px;
-    height: 40px;
-    padding: 8px 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    font-size: 14px;
+.genero-modal-delete-button,
+.genero-modal-close-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     box-sizing: border-box;
     margin: 0;
     border: none;
 }
 
-.author-details-modal-delete-button {
+.genero-modal-delete-button {
     background-color: #dc3545;
     color: white;
     border: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.author-details-modal-delete-button:hover {
+.genero-modal-delete-button:hover {
     background-color: #a71d2a;
     color: #f8f9fa;
 }
 
-.author-details-modal-close-button {
+.genero-modal-close-button {
     background-color: transparent;
     color: #007bff;
     border: 2px solid #007bff;
 }
 
-.author-details-modal-close-button:hover {
+.genero-modal-close-button:hover {
     background-color: #0056b3;
     color: white;
+}
+
+@media (max-width: 600px) {
+    .genero-modal-content {
+        padding: 18px 8px 12px 8px;
+        min-width: 0;
+    }
+    .genero-modal-header h2 {
+        font-size: 1.2rem;
+    }
+    .genero-modal-footer {
+        flex-direction: column;
+    }
+    .genero-modal-delete-button,
+    .genero-modal-close-button {
+        width: 100%;
+        margin: 5px 0;
+    }
 }

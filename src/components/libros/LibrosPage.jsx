@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { obtenerLibros, obtenerLibroPorId, crearLibro, actualizarLibro, eliminarLibro } from '../../services/librosService';
+import { obtenerLibros, obtenerLibroPorId, actualizarLibro, eliminarLibro, crearLibro } from '../../services/librosService';
+import { obtenerAutores } from '../../services/autoresService';
 import LibroDetailsModal from '../modals/LibroDetailsModal';
 import EditCreateLibro from '../modals/EditCreateLibro';
 import './libros.css';
 
 function LibrosPage() {
     const [libros, setLibros] = useState([]);
+    const [autores, setAutores] = useState([]);
     const [libroSeleccionado, setLibroSeleccionado] = useState(null);
     const [mostrarDetallesModal, setMostrarDetallesModal] = useState(false);
     const [mostrarCrearModal, setMostrarCrearModal] = useState(false);
@@ -15,14 +17,37 @@ function LibrosPage() {
             const data = await obtenerLibros();
             setLibros(Array.isArray(data) ? data : []);
         } catch (error) {
-            console.error('Error al obtener los libros:', error);
             setLibros([]);
+        }
+    };
+
+    const fetchAutores = async () => {
+        try {
+            const data = await obtenerAutores();
+            let autoresArr = [];
+            if (Array.isArray(data.data)) {
+                autoresArr = data.data;
+            } else if (Array.isArray(data)) {
+                autoresArr = data;
+            } else if (data && Array.isArray(data.autores)) {
+                autoresArr = data.autores;
+            }
+            setAutores(autoresArr);
+        } catch (error) {
+            setAutores([]);
         }
     };
 
     useEffect(() => {
         fetchLibros();
+        fetchAutores();
     }, []);
+
+    // Debug: Mostrar datos en consola
+    useEffect(() => {
+        console.log('Libros:', libros);
+        console.log('Autores:', autores);
+    }, [libros, autores]);
 
     const handleVerLibro = async (libro) => {
         try {
@@ -56,26 +81,43 @@ function LibrosPage() {
 
     const handleEditarLibro = async (datosEditados) => {
         try {
-            await actualizarLibro(libroSeleccionado.id, datosEditados);
+            // Incluye isbn con el valor original del libro seleccionado
+            const libroPayload = {
+                titulo: datosEditados.titulo,
+                anio_publicacion: String(datosEditados.anio_publicacion).slice(0, 4), // Solo el año
+                id_categoria: datosEditados.id_categoria,
+                id_editorial: datosEditados.id_editorial,
+                isbn: libroSeleccionado.isbn, // valor original, no editable
+                cantidad_disponible: datosEditados.cantidad_disponible,
+                autores: Array.isArray(datosEditados.autores)
+                    ? datosEditados.autores.map(a => a.id_autor || a) // soporta objetos o ids
+                    : [],
+            };
+            console.log('Payload enviado al editar libro:', libroPayload);
+            await actualizarLibro(libroSeleccionado.id_libro, libroPayload);
             await fetchLibros();
             cerrarDetallesModal();
         } catch (error) {
-            alert('Error al editar el libro');
+            console.error('Error al editar el libro:', error);
+            alert('Error al editar el libro: ' + (error.message || error));
         }
     };
 
     const handleEliminarLibro = async () => {
         try {
-            await eliminarLibro(libroSeleccionado.id);
+            console.log(`Intentando eliminar el libro con ID: ${libroSeleccionado.id_libro}`);
+            await eliminarLibro(libroSeleccionado.id_libro);
+            console.log('Libro eliminado correctamente');
             await fetchLibros();
             cerrarDetallesModal();
         } catch (error) {
-            alert('Error al eliminar el libro');
+            console.error('Error al eliminar el libro:', error);
+            alert(`Error al eliminar el libro: ${error.message || error}`);
         }
     };
 
     return (
-        <div className="libros-container">
+        <div className="libros-container mt-4">
             <h1 className="libros-title">Gestión de Libros</h1>
             <div className="libros-table-wrapper">
                 <table className="libros-table">
@@ -90,18 +132,39 @@ function LibrosPage() {
                         </tr>
                     </thead>
                     <tbody>
-                        {libros.map((libro) => (
-                            <tr key={libro.id_libro}>
-                                <td>{libro.id_libro}</td>
-                                <td>{libro.titulo}</td>
-                                <td>{libro.autores && libro.autores.length > 0 ? libro.autores[0].nombre : ''}</td>
-                                <td>{libro.anio_publicacion}</td>
-                                <td>{libro.categoria_nombre}</td>
-                                <td>
-                                    <button className="libros-button" onClick={() => handleVerLibro(libro)}>Ver</button>
+                        {libros.map((libro) => {
+                            // Mostrar los nombres de los autores si existen
+                            const autoresNombres = Array.isArray(libro.autores) && libro.autores.length > 0
+                                ? libro.autores.map(a => a.nombre).join(', ')
+                                : null;
+                            return (
+                                <tr key={libro.id_libro}>
+                                    <td>{libro.id_libro}</td>
+                                    <td>{libro.titulo}</td>
+                                    <td>
+                                        {autoresNombres ? (
+                                            autoresNombres
+                                        ) : (
+                                            <span style={{color: 'red', fontWeight: 'bold'}}>
+                                                Sin autor
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td>{libro.anio_publicacion}</td>
+                                    <td>{libro.categoria_nombre}</td>
+                                    <td>
+                                        <button className="libros-button" onClick={() => handleVerLibro(libro)}>Ver</button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                        {autores.length === 0 && (
+                            <tr>
+                                <td colSpan="6" style={{color: 'orange', fontWeight: 'bold', textAlign: 'center'}}>
+                                    No hay autores cargados. Revisa la API de autores.
                                 </td>
                             </tr>
-                        ))}
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -112,6 +175,7 @@ function LibrosPage() {
                 <EditCreateLibro
                     onClose={cerrarCrearModal}
                     onSave={handleCrearLibro}
+                    autoresGlobal={autores}
                 />
             )}
             {mostrarDetallesModal && (

@@ -1,0 +1,78 @@
+.delete-genero-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.delete-genero-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 24px 24px 24px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.delete-genero-modal-icon {
+    font-size: 90px;
+    color: #b10000;
+    margin-bottom: 8px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.delete-genero-modal-title {
+    color: #b10000;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.delete-genero-modal-text {
+    color: #555;
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+}
+
+.delete-genero-modal-delete-button {
+    background: #b10000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.delete-genero-modal-delete-button:hover {
+    background: #7a0000;
+}
+
+.delete-genero-modal-cancel-button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.delete-genero-modal-cancel-button:hover {
+    background: #0d47a1;
+}

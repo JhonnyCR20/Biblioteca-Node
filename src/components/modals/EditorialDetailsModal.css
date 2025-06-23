@@ -1,5 +1,4 @@
-/* Styles specific to the AuthorDetailsModal - now fully unique */
-.author-details-modal {
+.editorial-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,10 +8,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 2000;
 }
 
-.author-details-modal-content {
+.editorial-modal-content {
     background-color: white;
     color: black;
     padding: 20px;
@@ -24,7 +23,7 @@
     border: none;
 }
 
-.author-details-modal-header {
+.editorial-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,7 +32,14 @@
     border: none;
 }
 
-.author-details-modal-edit-button {
+.editorial-modal-header h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #222;
+    margin: 0;
+}
+
+.editorial-modal-edit-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -46,70 +52,84 @@
     transition: opacity 0.2s ease;
 }
 
-.author-details-modal-edit-button:hover {
+.editorial-modal-edit-button:hover {
     opacity: 0.8;
 }
 
-.author-details-modal-edit-button .author-edit-icon {
+.editorial-modal-edit-button .editorial-edit-icon {
     width: 40px;
     height: 40px;
     min-width: 40px;
     min-height: 40px;
     object-fit: contain;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background: none;
-    box-shadow: none;
 }
 
-.author-details-modal-body {
+.editorial-modal-body {
     margin-bottom: 20px;
 }
 
-.author-details-modal-footer {
+.editorial-modal-body p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.editorial-modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-    align-items: center;
-    border: none;
+    margin-top: 20px;
 }
 
-.author-details-modal-delete-button, .author-details-modal-close-button {
-    width: 100px;
-    height: 40px;
-    padding: 8px 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    font-size: 14px;
+.editorial-modal-delete-button,
+.editorial-modal-close-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     box-sizing: border-box;
     margin: 0;
     border: none;
 }
 
-.author-details-modal-delete-button {
+.editorial-modal-delete-button {
     background-color: #dc3545;
     color: white;
     border: none;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.author-details-modal-delete-button:hover {
+.editorial-modal-delete-button:hover {
     background-color: #a71d2a;
     color: #f8f9fa;
 }
 
-.author-details-modal-close-button {
+.editorial-modal-close-button {
     background-color: transparent;
     color: #007bff;
     border: 2px solid #007bff;
 }
 
-.author-details-modal-close-button:hover {
+.editorial-modal-close-button:hover {
     background-color: #0056b3;
     color: white;
+}
+
+@media (max-width: 600px) {
+    .editorial-modal-content {
+        padding: 18px 8px 12px 8px;
+        min-width: 0;
+    }
+    .editorial-modal-header h2 {
+        font-size: 1.2rem;
+    }
+    .editorial-modal-footer {
+        flex-direction: column;
+    }
+    .editorial-modal-delete-button,
+    .editorial-modal-close-button {
+        width: 100%;
+        margin: 5px 0;
+    }
 }

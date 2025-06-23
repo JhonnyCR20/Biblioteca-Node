@@ -27,9 +27,8 @@ const LibroDetailsModal = ({ libro, onClose, onEdit, onDelete }) => {
             <div className="libro-modal" ref={modalRef} onClick={handleBackdropClick}>
                 <div className="libro-modal-content">
                     <div className="libro-modal-header">
-                        <h2>Detalles del Libro</h2>
-                        <button className="libro-modal-edit-button" onClick={handleEditClick} title="Editar">
-                            <img src={editarIcon} alt="Editar" className="edit-icon" />
+                        <h2>Detalles del Libro</h2>                        <button className="libro-modal-edit-button" onClick={handleEditClick} title="Editar">
+                            <img src={editarIcon} alt="Editar" className="libro-edit-icon" style={{width: '40px', height: '40px'}} />
                         </button>
                     </div>
                     <div className="libro-modal-body">
@@ -65,13 +64,18 @@ const LibroDetailsModal = ({ libro, onClose, onEdit, onDelete }) => {
             {isDeleteModalOpen && (
                 <DeleteLibroModal
                     onClose={() => {
+                        console.log('Cerrando modal de eliminación');
                         handleCloseDeleteModal();
-                        onClose();
                     }}
                     onDelete={() => {
-                        onDelete();
-                        handleCloseDeleteModal();
-                        onClose();
+                        console.log('Llamando a onDelete desde LibroDetailsModal');
+                        try {
+                            onDelete();
+                            handleCloseDeleteModal();
+                        } catch (error) {
+                            console.error('Error durante la eliminación:', error);
+                            alert(`Error al eliminar: ${error.message || error}`);
+                        }
                     }}
                 />
             )}

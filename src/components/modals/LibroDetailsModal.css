@@ -49,9 +49,19 @@
   justify-content: center;
   align-items: center;
   box-shadow: none;
-  color: #007bff;
-  font-size: 1rem;
-  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.libro-modal-edit-button:hover {
+  opacity: 0.8;
+}
+
+.libro-modal-edit-button .libro-edit-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  object-fit: contain;
 }
 
 .libro-modal-body {
