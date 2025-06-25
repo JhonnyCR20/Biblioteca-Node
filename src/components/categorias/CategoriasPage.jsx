@@ -130,7 +130,8 @@ function CategoriasPage() {
                     borderCollapse: 'separate',
                     borderSpacing: '0',
                     backgroundColor: 'white',
-                    color: '#333',                    tableLayout: 'fixed'
+                    color: '#333',
+                    tableLayout: 'fixed'
                 }}><thead style={{
                         position: 'sticky',
                         top: '0',
@@ -138,8 +139,7 @@ function CategoriasPage() {
                         width: 'calc(100% - 8px)',
                         display: 'table',
                         tableLayout: 'fixed'
-                    }}>
-                        <tr><th style={{
+                    }}><tr><th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
@@ -148,7 +148,7 @@ function CategoriasPage() {
                                 borderBottom: '2px solid #f0f0f0',
                                 borderTopLeftRadius: '8px',
                                 paddingLeft: '20px'
-                            }}>ID</th>                            <th style={{
+                            }}>ID</th><th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
@@ -169,15 +169,15 @@ function CategoriasPage() {
                                 padding: '15px',
                                 textAlign: 'right',
                                 borderBottom: '2px solid #f0f0f0',
-                                borderTopRightRadius: '8px',                                paddingRight: '35px'                            }}>Acciones</th></tr>
-                    </thead><tbody style={{
+                                borderTopRightRadius: '8px',
+                                paddingRight: '35px'
+                            }}>Acciones</th></tr></thead><tbody style={{
                         display: 'block',
                         overflowY: 'auto',
                         overflowX: 'hidden',
                         height: '350px',
                         width: '100%'
-                    }}>
-                        {generos.map((genero) => (
+                    }}>{generos.map((genero) => (
                             <tr 
                                 key={genero.id_categoria} 
                                 style={{
@@ -187,30 +187,26 @@ function CategoriasPage() {
                                 }}
                                 onMouseEnter={(e) => {
                                     e.currentTarget.style.backgroundColor = '#f8f9fa';
-                                }}
-                                onMouseLeave={(e) => {
+                                }}                                onMouseLeave={(e) => {
                                     e.currentTarget.style.backgroundColor = 'transparent';
-                                }}
-                            >
+                                }}>
                                 <td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     paddingLeft: '20px',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{genero.id_categoria}</td>                                <td style={{
+                                }}>{genero.id_categoria}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{genero.nombre}</td>
-                                <td style={{
+                                }}>{genero.nombre}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{genero.descripcion || 'Sin descripción'}</td>
-                                <td style={{
+                                }}>{genero.descripcion || 'Sin descripción'}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'right',
                                     borderBottom: '1px solid #dddddd',
@@ -236,13 +232,11 @@ function CategoriasPage() {
                                         onMouseLeave={(e) => {
                                             e.target.style.backgroundColor = 'transparent';
                                             e.target.style.color = '#007bff';
-                                        }}                                        onClick={() => handleVerGenero(genero)}
-                                    >
+                                        }}                                        onClick={() => handleVerGenero(genero)}                                    >
                                         Ver</button>
-                                </td>
-                            </tr>
-                        ))}
-                        {generos.length === 0 && (                            <tr style={{
+                                </td></tr>
+                        ))}{generos.length === 0 && (
+                            <tr style={{
                                 display: 'table',
                                 width: 'calc(100% - 8px)',
                                 tableLayout: 'fixed'
@@ -250,11 +244,9 @@ function CategoriasPage() {
                                 <td colSpan="4" style={{
                                     textAlign: 'center',
                                     padding: '15px',
-                                    borderBottom: '1px solid #dddddd',                                    color: '#333'
-                                }}>
-                                    No hay categorías para mostrar.</td>
-                            </tr>                        )}
-                    </tbody></table>
+                                    borderBottom: '1px solid #dddddd',                                    color: '#333'                                }}>
+                                    No hay categorías para mostrar.</td></tr>
+                        )}</tbody></table>
             </div>
             <div className="crear-categoria-container" style={{
                 width: '100%',

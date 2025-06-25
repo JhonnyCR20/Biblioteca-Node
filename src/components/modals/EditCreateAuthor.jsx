@@ -43,11 +43,12 @@ const EditCreateAuthor = ({ onClose, onSave, initialData = {} }) => {
                         placeholder="Escribe aquí"
                         value={nacionalidad}
                         onChange={(e) => setNacionalidad(e.target.value)}
-                        maxLength="35"
-                    />
+                        maxLength="35"                    />
                 </div>
-                <button className="edit-create-modal-save-button" onClick={handleSave}>{initialData && initialData.id_autor ? 'Guardar' : 'Crear'}</button>
-                <button className="edit-create-modal-close-button" onClick={onClose}>Cancelar</button>
+                <div className="edit-create-modal-actions">
+                    <button className="edit-create-modal-save-button" onClick={handleSave}>{initialData && initialData.id_autor ? 'Guardar' : 'Crear'}</button>
+                    <button className="edit-create-modal-close-button" onClick={onClose}>Cancelar</button>
+                </div>
             </div>
         </div>
     );

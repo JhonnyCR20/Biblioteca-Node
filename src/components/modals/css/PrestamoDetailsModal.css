@@ -1,0 +1,180 @@
+/* Modal de detalles de préstamo */
+.prestamo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.prestamo-modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header del modal */
+.prestamo-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.prestamo-modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Botón de editar en el header */
+.prestamo-modal-edit-button {   
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    transition: none !important;
+    color: transparent !important;
+    outline: none !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    box-sizing: content-box !important;
+}
+
+.prestamo-modal-edit-button:hover {
+    background: none !important;
+}
+
+.prestamo-modal-edit-button:focus {
+    outline: none !important;
+    background: none !important;
+}
+
+.prestamo-edit-icon {
+    width: 35px !important;
+    height: 35px !important;
+    filter: brightness(0) !important;
+    flex-shrink: 0 !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+/* Body del modal */
+.prestamo-modal-body {
+    padding: 20px;
+}
+
+.prestamo-modal-body p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.prestamo-modal-body strong {
+    color: #555;
+}
+
+/* Footer del modal */
+.prestamo-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Botones del footer */
+.prestamo-modal-delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.prestamo-modal-delete-button:hover {
+    background-color: #c82333;
+}
+
+.prestamo-modal-close-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.prestamo-modal-close-button:hover {
+    background-color: #5a6268;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .prestamo-modal-content {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .prestamo-modal-header,
+    .prestamo-modal-body,
+    .prestamo-modal-footer {
+        padding: 15px;
+    }
+    
+    .prestamo-modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .prestamo-modal-body p {
+        font-size: 14px;
+    }
+    
+    .prestamo-modal-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .prestamo-modal-delete-button,
+    .prestamo-modal-close-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,129 @@
+/* Usuario Details Modal */
+.usuario-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.usuario-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.usuario-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.usuario-modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.usuario-modal-edit-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.usuario-modal-edit-button:hover {
+    background-color: #f0f0f0;
+}
+
+.usuario-edit-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.usuario-modal-body {
+    margin-bottom: 20px;
+}
+
+.usuario-modal-body p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.usuario-modal-body strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.usuario-details-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.usuario-details-eliminar-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.usuario-details-eliminar-btn:hover {
+    background-color: #c82333;
+}
+
+.usuario-details-regresar-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.usuario-details-regresar-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .usuario-modal-content {
+        width: 95%;
+        margin: 10px;
+    }
+    
+    .usuario-modal-header h2 {
+        font-size: 1.3rem;
+    }
+      .usuario-details-modal-footer {
+        flex-direction: column;
+    }
+    
+    .usuario-details-eliminar-btn,
+    .usuario-details-regresar-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

@@ -160,12 +160,11 @@ const EditCreateLector = ({ initialData, onClose, onSave, isEdit = false }) => {
                         </div>
                     </div>
                     
-                    {/* Tercera fila: Botones */}
-                    <div className="edit-create-lector-actions">
-                        <button type="submit" className="save-button">
+                    {/* Tercera fila: Botones */}                    <div className="edit-create-lector-actions">
+                        <button type="submit" className="edit-create-lector-save-button">
                             Guardar
                         </button>
-                        <button type="button" onClick={onClose} className="cancel-button">
+                        <button type="button" onClick={onClose} className="edit-create-lector-cancel-button">
                             Cancelar
                         </button>
                     </div>

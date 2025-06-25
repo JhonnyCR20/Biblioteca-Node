@@ -8,6 +8,10 @@ import EditorialesPage from './components/editoriales/EditorialesPage'
 import CategoriasPage from './components/categorias/CategoriasPage'
 import ReservasPage from './components/reservas/ReservasPage'
 import LectoresPage from './components/lectores/LectoresPage'
+import MultasPage from './components/multas/MultasPage'
+import PrestamosPage from './components/prestamos/PrestamosPage'
+import HistorialPage from './components/historial/HistorialPage'
+import UsuariosPage from './components/usuarios/UsuariosPage'
 
 function App() {
   return (
@@ -22,6 +26,10 @@ function App() {
           <Route path="/categorias" element={<CategoriasPage />} />
           <Route path="/reservas" element={<ReservasPage />} />
           <Route path="/lectores" element={<LectoresPage />} />
+          <Route path="/multas" element={<MultasPage />} />
+          <Route path="/prestamos" element={<PrestamosPage />} />
+          <Route path="/historial" element={<HistorialPage />} />
+          <Route path="/usuarios" element={<UsuariosPage />} />
         </Routes>
       </main>
     </div>

@@ -1,0 +1,278 @@
+/* Modal de crear/editar multa */
+.edit-create-multa-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-create-multa-content {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 500px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header del modal */
+.edit-create-multa-header {
+    padding: 15px 20px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.edit-create-multa-header h2 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+/* Formulario */
+.edit-create-multa-form {
+    padding: 15px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Filas del formulario */
+.edit-create-multa-form .form-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px 40px !important;
+    margin-bottom: 0 !important;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+/* Grupos de formulario */
+.edit-create-multa-form .form-group {
+    display: flex !important;
+    flex-direction: column !important;
+    margin-bottom: 0 !important;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    color: #444;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.edit-create-multa-form .form-control {
+    width: 100% !important;
+    padding: 8px 10px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.3s !important;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.form-control.error {
+    border-color: #dc3545;
+}
+
+textarea.form-control {
+    resize: none;
+    height: 60px;
+    font-family: inherit;
+}
+
+/* Estilo del checkbox */
+/* Estilo del checkbox */
+.edit-create-multa-form .checkbox-input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+    align-self: flex-start;
+    justify-self: start;
+}
+
+.form-control.error:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* Select específico */
+select.form-control {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+    appearance: none;
+}
+
+/* Textarea específico */
+textarea.form-control {
+    resize: none;
+    height: 60px;
+    font-family: inherit;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.error-message::before {
+    content: "⚠";
+    margin-right: 5px;
+}
+
+/* Botones de acción */
+.edit-create-multa-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+    margin-top: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.edit-create-multa-save-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.edit-create-multa-save-button:hover {
+    background-color: #0056b3;
+}
+
+.edit-create-multa-save-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.edit-create-multa-cancel-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin: 0 !important;
+    box-sizing: border-box;
+}
+
+.edit-create-multa-cancel-button:hover {
+    background-color: #a71d2a;
+}
+
+/* Force CSS reload for button spacing - v2025.3 - WIDER FIELDS */
+
+/* Estados de carga */
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: #6c757d;
+    font-size: 1.1rem;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .edit-create-multa-content {
+        width: 95%;
+        max-height: 95vh;
+        margin: 10px;
+    }    .edit-create-multa-header,
+    .edit-create-multa-form {
+        padding: 15px;
+    }
+    
+    .edit-create-multa-header h2 {
+        font-size: 1.3rem;
+    }.form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-control {
+        font-size: 16px;
+    }.edit-create-multa-actions {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }    .edit-create-multa-save-button,
+    .edit-create-multa-cancel-button {
+        width: 100%;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .edit-create-multa-content {
+        width: 98%;
+        margin: 5px;
+    }
+
+    .edit-create-multa-header {
+        padding: 12px 15px;
+    }
+
+    .edit-create-multa-form {
+        padding: 15px;
+    }
+
+    .form-control {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Estilo específico para el checkbox - alineado a la izquierda */
+.edit-create-multa-form .checkbox-input {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    align-self: flex-start !important;
+    justify-self: start !important;
+}

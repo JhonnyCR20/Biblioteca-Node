@@ -16,7 +16,7 @@
     border-radius: 8px;
     width: 100%;
     max-width: 430px;
-    max-height: 595px;
+    max-height: 605px;
     margin: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
@@ -85,6 +85,8 @@
 
 .edit-create-reserva-actions {
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .save-button {
@@ -95,8 +97,7 @@
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px;
+    width: 100%;;
 }
 
 .save-button:hover {

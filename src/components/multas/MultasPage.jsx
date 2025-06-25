@@ -1,52 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { obtenerReservas, obtenerReservaPorId, actualizarReserva, eliminarReserva, crearReserva } from '../../services/reservasService';
-import ReservaDetailsModal from '../modals/ReservaDetailsModal';
-import EditCreateReserva from '../modals/EditCreateReserva';
-import DeleteReservaModal from '../modals/DeleteReservaModal';
+import { obtenerMultas, obtenerMultaPorId, actualizarMulta, eliminarMulta, crearMulta } from '../../services/multasService';
+import MultaDetailsModal from '../modals/MultaDetailsModal';
+import EditCreateMulta from '../modals/EditCreateMulta';
+import DeleteMultaModal from '../modals/DeleteMultaModal';
+import './multas.css';
 
-function ReservasPage() {
-    const [reservas, setReservas] = useState([]);
-    const [reservaSeleccionada, setReservaSeleccionada] = useState(null);
+function MultasPage() {
+    const [multas, setMultas] = useState([]);
+    const [multaSeleccionada, setMultaSeleccionada] = useState(null);
     const [mostrarDetallesModal, setMostrarDetallesModal] = useState(false);
     const [mostrarCrearModal, setMostrarCrearModal] = useState(false);
     const [mostrarEliminarModal, setMostrarEliminarModal] = useState(false);
 
-    const fetchReservas = async () => {
+    const fetchMultas = async () => {
         try {
-            const data = await obtenerReservas();
-            setReservas(Array.isArray(data) ? data : []);
+            const data = await obtenerMultas();
+            setMultas(Array.isArray(data) ? data : []);
         } catch (error) {
-            console.error('Error al obtener reservas:', error);
-            setReservas([]);
+            console.error('Error al obtener multas:', error);
+            setMultas([]);
         }
     };
 
     useEffect(() => {
-        fetchReservas();
+        fetchMultas();
     }, []);
 
-    const handleVerReserva = async (reserva) => {
+    const handleVerMulta = async (multa) => {
         try {
-            // Obtener datos frescos de la reserva por ID
-            const reservaData = await obtenerReservaPorId(reserva.id_reserva);
-            setReservaSeleccionada(reservaData);
+            console.log('👁️ Haciendo clic en Ver multa:', multa);
+            console.log('👁️ ID de la multa:', multa.id_multa);
+            
+            // Obtener datos frescos de la multa por ID
+            const multaData = await obtenerMultaPorId(multa.id_multa);
+            console.log('👁️ Datos obtenidos para el modal:', multaData);
+            
+            setMultaSeleccionada(multaData);
             setMostrarDetallesModal(true);
         } catch (error) {
-            alert('Error al obtener los detalles de la reserva');
+            console.error('❌ Error al obtener los detalles de la multa:', error);
+            alert('Error al obtener los detalles de la multa: ' + error.message);
         }
     };
 
     const cerrarDetallesModal = () => {
         setMostrarDetallesModal(false);
-        setReservaSeleccionada(null);
+        setMultaSeleccionada(null);
     };
 
     const cerrarCrearModal = () => {
         setMostrarCrearModal(false);
     };
 
-    const abrirEliminarModal = (reserva) => {
-        setReservaSeleccionada(reserva);
+    const abrirEliminarModal = (multa) => {
+        setMultaSeleccionada(multa);
         setMostrarEliminarModal(true);
     };
 
@@ -54,44 +61,44 @@ function ReservasPage() {
         setMostrarEliminarModal(false);
     };
 
-    const handleCrearReserva = async (nuevaReserva) => {
+    const handleCrearMulta = async (nuevaMulta) => {
         try {
-            await crearReserva(nuevaReserva);
-            await fetchReservas();
+            await crearMulta(nuevaMulta);
+            await fetchMultas();
             cerrarCrearModal();
         } catch (error) {
-            console.error('Error al crear la reserva:', error);
-            alert(`Error al crear la reserva: ${error.message || error}`);
-        }
-    };    const handleEditarReserva = async (datosEditados) => {
-        try {
-            console.log('Datos a editar:', datosEditados);
-            console.log('ID de la reserva seleccionada:', reservaSeleccionada.id_reserva);
-            await actualizarReserva(reservaSeleccionada.id_reserva, datosEditados);
-            await fetchReservas();
-            cerrarDetallesModal();
-        } catch (error) {
-            console.error('Error al editar la reserva:', error);
-            alert(`Error al editar la reserva: ${error.message || error}`);
+            console.error('Error al crear la multa:', error);
+            alert(`Error al crear la multa: ${error.message || error}`);
         }
     };
 
-    const handleEliminarReserva = async () => {
+    const handleEditarMulta = async (datosEditados) => {
         try {
-            console.log(`Intentando eliminar la reserva con ID: ${reservaSeleccionada.id_reserva}`);
-            await eliminarReserva(reservaSeleccionada.id_reserva);
-            console.log('Reserva eliminada correctamente');
-            await fetchReservas();
+            await actualizarMulta(multaSeleccionada.id_multa, datosEditados);
+            await fetchMultas();
+            cerrarDetallesModal();
+        } catch (error) {
+            console.error('Error al editar la multa:', error);
+            alert(`Error al editar la multa: ${error.message || error}`);
+        }
+    };
+
+    const handleEliminarMulta = async () => {
+        try {
+            console.log(`Intentando eliminar la multa con ID: ${multaSeleccionada.id_multa}`);
+            await eliminarMulta(multaSeleccionada.id_multa);
+            console.log('Multa eliminada correctamente');
+            await fetchMultas();
             cerrarEliminarModal();
             cerrarDetallesModal();
         } catch (error) {
-            console.error('Error al eliminar la reserva:', error);
-            alert(`Error al eliminar la reserva: ${error.message || error}`);
+            console.error('Error al eliminar la multa:', error);
+            alert(`Error al eliminar la multa: ${error.message || error}`);
         }
     };
 
     return (
-        <div className="reservas-container" style={{
+        <div className="multas-container" style={{
             padding: '20px',
             backgroundColor: '#f4f4f9',
             fontFamily: 'Arial, sans-serif',
@@ -106,7 +113,7 @@ function ReservasPage() {
             maxWidth: '100%',
             overflowX: 'hidden'
         }}>
-            <h1 className="reservas-title" style={{
+            <h1 className="multas-title" style={{
                 textAlign: 'center',
                 fontSize: '2.2rem',
                 fontWeight: '700',
@@ -114,8 +121,8 @@ function ReservasPage() {
                 color: '#222',
                 width: '100%',
                 padding: '0 20px'
-            }}>Gestión de Reservas</h1>
-            <div className="reservas-table-wrapper" style={{
+            }}>Gestión de Multas</h1>
+            <div className="multas-table-wrapper" style={{
                 width: '90%',
                 maxWidth: '100%',
                 background: '#fff',
@@ -127,21 +134,24 @@ function ReservasPage() {
                 position: 'relative',
                 height: '400px'
             }}>
-                <table className="reservas-table" style={{
+                <table className="multas-table" style={{
                     width: '100%',
                     borderCollapse: 'separate',
                     borderSpacing: '0',
                     backgroundColor: 'white',
                     color: '#333',
                     tableLayout: 'fixed'
-                }}><thead style={{
+                }}>
+                    <thead style={{
                         position: 'sticky',
                         top: '0',
                         zIndex: '10',
                         width: 'calc(100% - 8px)',
                         display: 'table',
                         tableLayout: 'fixed'
-                    }}><tr><th style={{
+                    }}>
+                        <tr>
+                            <th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
@@ -150,35 +160,32 @@ function ReservasPage() {
                                 borderBottom: '2px solid #f0f0f0',
                                 borderTopLeftRadius: '8px',
                                 paddingLeft: '20px'
-                            }}>ID</th><th style={{
+                            }}>ID</th>
+                            <th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
                                 padding: '15px',
                                 textAlign: 'left',
                                 borderBottom: '2px solid #f0f0f0'
-                            }}>Libro</th><th style={{
+                            }}>ID Préstamo</th>
+                            <th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
                                 padding: '15px',
                                 textAlign: 'left',
                                 borderBottom: '2px solid #f0f0f0'
-                            }}>Lector</th><th style={{
+                            }}>Monto</th>
+                            <th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
                                 padding: '15px',
                                 textAlign: 'left',
                                 borderBottom: '2px solid #f0f0f0'
-                            }}>Fecha Reserva</th><th style={{
-                                backgroundColor: '#f0f4f8',
-                                color: '#333',
-                                fontWeight: 'bold',
-                                padding: '15px',
-                                textAlign: 'left',
-                                borderBottom: '2px solid #f0f0f0'
-                            }}>Estado</th><th style={{
+                            }}>Estado</th>
+                            <th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
@@ -187,16 +194,19 @@ function ReservasPage() {
                                 borderBottom: '2px solid #f0f0f0',
                                 borderTopRightRadius: '8px',
                                 paddingRight: '35px'
-                            }}>Acciones</th></tr></thead><tbody style={{
+                            }}>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody style={{
                         display: 'block',
                         overflowY: 'auto',
                         overflowX: 'hidden',
                         height: '350px',
                         width: '100%'
                     }}>
-                        {reservas.map((reserva) => (
+                        {multas.map((multa) => (
                             <tr 
-                                key={reserva.id_reserva} 
+                                key={multa.id_multa} 
                                 style={{
                                     display: 'table',
                                     width: 'calc(100% - 8px)',
@@ -215,31 +225,36 @@ function ReservasPage() {
                                     paddingLeft: '20px',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{reserva.id_reserva}</td>
+                                }}>{multa.id_multa}</td>
                                 <td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{reserva.titulo_libro || `Libro ID: ${reserva.id_libro}`}</td>
+                                }}>{multa.id_prestamo}</td>
                                 <td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{reserva.nombre_lector ? `${reserva.nombre_lector} ${reserva.apellido_lector}` : `Lector ID: ${reserva.id_lector}`}</td>
+                                }}>{"₡"}{parseFloat(multa.monto || 0).toFixed(2)}</td>
                                 <td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
-                                }}>{new Date(reserva.fecha_reserva).toLocaleDateString('es-ES')}</td>
-                                <td style={{
-                                    padding: '15px',
-                                    textAlign: 'left',
-                                    borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>{reserva.estado}</td>
+                                }}>
+                                    <span style={{
+                                        padding: '4px 12px',
+                                        borderRadius: '12px',
+                                        fontSize: '12px',
+                                        fontWeight: '600',
+                                        backgroundColor: multa.pagado === 1 ? '#d4edda' : '#f8d7da',
+                                        color: multa.pagado === 1 ? '#155724' : '#721c24'
+                                    }}>
+                                        {multa.pagado === 1 ? 'Pagado' : 'Pendiente'}
+                                    </span>
+                                </td>
                                 <td style={{
                                     padding: '15px',
                                     textAlign: 'right',
@@ -247,7 +262,7 @@ function ReservasPage() {
                                     paddingRight: '10px'
                                 }}>
                                     <button 
-                                        className="reservas-button" 
+                                        className="multas-button" 
                                         style={{
                                             padding: '8px 50px',
                                             backgroundColor: 'transparent',
@@ -267,39 +282,41 @@ function ReservasPage() {
                                             e.target.style.backgroundColor = 'transparent';
                                             e.target.style.color = '#007bff';
                                         }}
-                                        onClick={() => handleVerReserva(reserva)}
+                                        onClick={() => handleVerMulta(multa)}
                                     >
-                                        Ver</button>
+                                        Ver
+                                    </button>
                                 </td>
                             </tr>
                         ))}
-                        {reservas.length === 0 && (
+                        {multas.length === 0 && (
                             <tr style={{
                                 display: 'table',
                                 width: 'calc(100% - 8px)',
                                 tableLayout: 'fixed'
                             }}>
-                                <td colSpan="6" style={{
+                                <td colSpan="5" style={{
                                     textAlign: 'center',
                                     padding: '15px',
                                     borderBottom: '1px solid #dddddd',
                                     color: '#333'
                                 }}>
-                                    No hay reservas para mostrar.</td>
+                                    No hay multas para mostrar.
+                                </td>
                             </tr>
                         )}
-                    </tbody></table>
+                    </tbody>
+                </table>
             </div>
-            <div className="crear-reserva-container" style={{
+            <div className="crear-multa-container" style={{
                 width: '100%',
                 maxWidth: '100%',
                 textAlign: 'center',
                 margin: '20px auto 0 auto'
             }}>
                 <button 
-                    className="crear-reserva-button" 
+                    className="crear-multa-button" 
                     style={{
-                        marginbottom: '20px',
                         display: 'block',
                         margin: '20px auto',
                         padding: '15px 60px',
@@ -325,32 +342,32 @@ function ReservasPage() {
                 </button>
             </div>
             
-            {mostrarDetallesModal && reservaSeleccionada && (
-                <ReservaDetailsModal
-                    reserva={reservaSeleccionada}
+            {mostrarDetallesModal && multaSeleccionada && (
+                <MultaDetailsModal
+                    multa={multaSeleccionada}
                     onClose={cerrarDetallesModal}
-                    onEdit={handleEditarReserva}
-                    onDelete={handleEliminarReserva}
+                    onEdit={handleEditarMulta}
+                    onDelete={handleEliminarMulta}
                 />
             )}
             
             {mostrarCrearModal && (
-                <EditCreateReserva
+                <EditCreateMulta
                     onClose={cerrarCrearModal}
-                    onSave={handleCrearReserva}
+                    onSave={handleCrearMulta}
                     isEdit={false}
                 />
             )}
             
-            {mostrarEliminarModal && reservaSeleccionada && (
-                <DeleteReservaModal
+            {mostrarEliminarModal && multaSeleccionada && (
+                <DeleteMultaModal
                     onClose={cerrarEliminarModal}
-                    onDelete={handleEliminarReserva}
-                    reserva={reservaSeleccionada}
+                    onDelete={handleEliminarMulta}
+                    multa={multaSeleccionada}
                 />
             )}
         </div>
     );
 }
 
-export default ReservasPage;
+export default MultasPage;

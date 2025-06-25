@@ -1,0 +1,115 @@
+/* Delete Usuario Modal */
+.delete-usuario-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+}
+
+.delete-usuario-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.delete-usuario-modal-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #ffeaa7;
+    color: #e17055;
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+}
+
+.delete-usuario-modal-title {
+    margin: 0 0 15px;
+    color: #333;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.delete-usuario-modal-text {
+    margin: 0 0 10px;
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.delete-usuario-modal-warning {
+    margin: 0 0 25px;
+    color: #e74c3c;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-style: italic;
+}
+
+.delete-usuario-modal-delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+    min-width: 100px;
+}
+
+.delete-usuario-modal-delete-button:hover {
+    background-color: #c82333;
+}
+
+.delete-usuario-modal-cancel-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+    min-width: 100px;
+}
+
+.delete-usuario-modal-cancel-button:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .delete-usuario-modal-content {
+        width: 95%;
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .delete-usuario-modal-title {
+        font-size: 1.2rem;
+    }
+    
+    .delete-usuario-modal-delete-button,
+    .delete-usuario-modal-cancel-button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+    }
+}

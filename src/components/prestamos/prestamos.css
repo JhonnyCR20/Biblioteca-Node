@@ -1,0 +1,102 @@
+/* Estilos para la página de préstamos */
+.prestamos-container {
+    background-color: #f4f4f9;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+.prestamos-title {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.prestamos-table-wrapper {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.prestamos-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.prestamos-table th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.prestamos-table td {
+    padding: 15px;
+    color: #495057;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.prestamos-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.prestamos-button {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    padding: 8px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.prestamos-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.crear-prestamo-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.crear-prestamo-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .prestamos-container {
+        padding: 10px;
+    }
+    
+    .prestamos-title {
+        font-size: 2rem;
+    }
+    
+    .prestamos-table th,
+    .prestamos-table td {
+        padding: 10px 8px;
+        font-size: 14px;
+    }
+    
+    .prestamos-button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}

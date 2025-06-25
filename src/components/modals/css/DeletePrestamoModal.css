@@ -1,0 +1,77 @@
+.delete-prestamo-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.delete-prestamo-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 24px 24px 24px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.delete-prestamo-modal-icon {
+    font-size: 90px;
+    color: #b10000;
+    margin-bottom: 8px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.delete-prestamo-modal-title {
+    color: #b10000;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.delete-prestamo-modal-text {
+    color: #555;
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+}
+
+.delete-prestamo-modal-delete-button {
+    background: #b10000;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+}
+
+.delete-prestamo-modal-delete-button:hover {
+    background: #8b0000;
+    transform: translateY(-1px);
+}
+
+.delete-prestamo-modal-cancel-button {
+    background: transparent;
+    color: #666;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s ease;
+}
+
+.delete-prestamo-modal-cancel-button:hover {
+    color: #333;
+}

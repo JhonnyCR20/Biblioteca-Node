@@ -251,7 +251,7 @@ function LectoresPage() {
                                     <button 
                                         className="lectores-button" 
                                         style={{
-                                            padding: '8px 30px',
+                                            padding: '8px 50px',
                                             backgroundColor: 'transparent',
                                             color: '#007bff',
                                             border: '2px solid #007bff',

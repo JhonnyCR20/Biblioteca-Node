@@ -1,0 +1,163 @@
+/* Modal de detalles de multa */
+.multa-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.multa-modal-content {
+    background: white;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header del modal */
+.multa-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.multa-modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Botón de editar en el header */
+.multa-modal-edit-button {   
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    color: #007bff;
+    outline: none;
+}
+
+.multa-modal-edit-button:hover {
+    background-color: #f8f9fa;
+}
+
+.multa-modal-edit-button:focus {
+    outline: none;
+    background-color: #f8f9fa;
+}
+
+.multa-edit-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Body del modal */
+.multa-modal-body {
+    padding: 20px;
+}
+
+.multa-modal-body p {
+    margin: 10px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.multa-modal-body strong {
+    color: #555;
+}
+
+/* Footer del modal */
+.multa-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Botones del footer */
+.multa-modal-delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.multa-modal-delete-button:hover {
+    background-color: #c82333;
+}
+
+.multa-modal-close-button {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.multa-modal-close-button:hover {
+    background-color: #5a6268;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .multa-modal-content {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .multa-modal-header,
+    .multa-modal-body,
+    .multa-modal-footer {
+        padding: 15px;
+    }
+    
+    .multa-modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .multa-modal-body p {
+        font-size: 14px;
+    }
+      .multa-modal-footer {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .multa-modal-delete-button,
+    .multa-modal-close-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+}

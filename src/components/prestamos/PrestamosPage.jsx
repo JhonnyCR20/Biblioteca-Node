@@ -1,97 +1,138 @@
 import React, { useEffect, useState } from 'react';
-import { obtenerReservas, obtenerReservaPorId, actualizarReserva, eliminarReserva, crearReserva } from '../../services/reservasService';
-import ReservaDetailsModal from '../modals/ReservaDetailsModal';
-import EditCreateReserva from '../modals/EditCreateReserva';
-import DeleteReservaModal from '../modals/DeleteReservaModal';
+import { 
+    obtenerPrestamos, 
+    obtenerPrestamoPorId, 
+    actualizarPrestamoCompleto, 
+    eliminarPrestamo, 
+    crearPrestamoCompleto 
+} from '../../services/prestamosService';
+import PrestamoDetailsModal from '../modals/PrestamoDetailsModal';
+import EditCreatePrestamo from '../modals/EditCreatePrestamo';
+import DeletePrestamoModal from '../modals/DeletePrestamoModal';
+import './prestamos.css';
 
-function ReservasPage() {
-    const [reservas, setReservas] = useState([]);
-    const [reservaSeleccionada, setReservaSeleccionada] = useState(null);
+function PrestamosPage() {
+    const [prestamos, setPrestamos] = useState([]);
+    const [prestamoSeleccionado, setPrestamoSeleccionado] = useState(null);
     const [mostrarDetallesModal, setMostrarDetallesModal] = useState(false);
     const [mostrarCrearModal, setMostrarCrearModal] = useState(false);
     const [mostrarEliminarModal, setMostrarEliminarModal] = useState(false);
 
-    const fetchReservas = async () => {
+    const fetchPrestamos = async () => {
         try {
-            const data = await obtenerReservas();
-            setReservas(Array.isArray(data) ? data : []);
+            const data = await obtenerPrestamos();
+            setPrestamos(Array.isArray(data) ? data : []);
         } catch (error) {
-            console.error('Error al obtener reservas:', error);
-            setReservas([]);
+            console.error('Error al obtener préstamos:', error);
+            setPrestamos([]);
         }
     };
 
     useEffect(() => {
-        fetchReservas();
+        fetchPrestamos();
     }, []);
 
-    const handleVerReserva = async (reserva) => {
+    const handleVerPrestamo = async (prestamo) => {
         try {
-            // Obtener datos frescos de la reserva por ID
-            const reservaData = await obtenerReservaPorId(reserva.id_reserva);
-            setReservaSeleccionada(reservaData);
+            console.log('👁️ Haciendo clic en Ver préstamo:', prestamo);
+            console.log('👁️ ID del préstamo:', prestamo.id_prestamo);
+            
+            // Obtener datos frescos del préstamo por ID
+            const prestamoData = await obtenerPrestamoPorId(prestamo.id_prestamo);
+            console.log('👁️ Datos obtenidos para el modal:', prestamoData);
+            
+            setPrestamoSeleccionado(prestamoData);
             setMostrarDetallesModal(true);
         } catch (error) {
-            alert('Error al obtener los detalles de la reserva');
+            console.error('❌ Error al obtener los detalles del préstamo:', error);
+            alert('Error al obtener los detalles del préstamo: ' + error.message);
         }
     };
 
     const cerrarDetallesModal = () => {
         setMostrarDetallesModal(false);
-        setReservaSeleccionada(null);
+        setPrestamoSeleccionado(null);
     };
 
     const cerrarCrearModal = () => {
         setMostrarCrearModal(false);
     };
 
-    const abrirEliminarModal = (reserva) => {
-        setReservaSeleccionada(reserva);
+    const abrirEliminarModal = (prestamo) => {
+        setPrestamoSeleccionado(prestamo);
         setMostrarEliminarModal(true);
     };
 
     const cerrarEliminarModal = () => {
         setMostrarEliminarModal(false);
-    };
-
-    const handleCrearReserva = async (nuevaReserva) => {
+    };    const handleCrearPrestamo = async (nuevoPrestamo) => {
         try {
-            await crearReserva(nuevaReserva);
-            await fetchReservas();
+            await crearPrestamoCompleto(nuevoPrestamo);
+            await fetchPrestamos();
             cerrarCrearModal();
         } catch (error) {
-            console.error('Error al crear la reserva:', error);
-            alert(`Error al crear la reserva: ${error.message || error}`);
-        }
-    };    const handleEditarReserva = async (datosEditados) => {
-        try {
-            console.log('Datos a editar:', datosEditados);
-            console.log('ID de la reserva seleccionada:', reservaSeleccionada.id_reserva);
-            await actualizarReserva(reservaSeleccionada.id_reserva, datosEditados);
-            await fetchReservas();
-            cerrarDetallesModal();
-        } catch (error) {
-            console.error('Error al editar la reserva:', error);
-            alert(`Error al editar la reserva: ${error.message || error}`);
+            console.error('Error al crear el préstamo:', error);
+            alert(`Error al crear el préstamo: ${error.message || error}`);
         }
     };
 
-    const handleEliminarReserva = async () => {
+    const handleEditarPrestamo = async (datosEditados) => {
         try {
-            console.log(`Intentando eliminar la reserva con ID: ${reservaSeleccionada.id_reserva}`);
-            await eliminarReserva(reservaSeleccionada.id_reserva);
-            console.log('Reserva eliminada correctamente');
-            await fetchReservas();
+            await actualizarPrestamoCompleto(prestamoSeleccionado.id_prestamo, datosEditados);
+            await fetchPrestamos();
+            cerrarDetallesModal();
+        } catch (error) {
+            console.error('Error al editar el préstamo:', error);
+            alert(`Error al editar el préstamo: ${error.message || error}`);
+        }
+    };
+
+    const handleEliminarPrestamo = async () => {
+        try {
+            console.log(`Intentando eliminar el préstamo con ID: ${prestamoSeleccionado.id_prestamo}`);
+            await eliminarPrestamo(prestamoSeleccionado.id_prestamo);
+            console.log('Préstamo eliminado correctamente');
+            await fetchPrestamos();
             cerrarEliminarModal();
             cerrarDetallesModal();
         } catch (error) {
-            console.error('Error al eliminar la reserva:', error);
-            alert(`Error al eliminar la reserva: ${error.message || error}`);
+            console.error('Error al eliminar el préstamo:', error);
+            alert(`Error al eliminar el préstamo: ${error.message || error}`);
         }
     };
 
+    const formatearFecha = (fecha) => {
+        if (!fecha) return 'N/A';
+        const date = new Date(fecha);
+        return date.toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        });
+    };
+
+    const getEstadoBadge = (estado) => {
+        const estilos = {
+            activo: { backgroundColor: '#d4edda', color: '#155724' },
+            devuelto: { backgroundColor: '#cce5ff', color: '#004085' },
+            vencido: { backgroundColor: '#f8d7da', color: '#721c24' }
+        };
+
+        return (
+            <span style={{
+                padding: '4px 12px',
+                borderRadius: '12px',
+                fontSize: '12px',
+                fontWeight: '600',
+                ...estilos[estado] || { backgroundColor: '#e2e3e5', color: '#495057' }
+            }}>
+                {estado ? estado.charAt(0).toUpperCase() + estado.slice(1) : 'N/A'}
+            </span>
+        );
+    };
+
     return (
-        <div className="reservas-container" style={{
+        <div className="prestamos-container" style={{
             padding: '20px',
             backgroundColor: '#f4f4f9',
             fontFamily: 'Arial, sans-serif',
@@ -106,7 +147,7 @@ function ReservasPage() {
             maxWidth: '100%',
             overflowX: 'hidden'
         }}>
-            <h1 className="reservas-title" style={{
+            <h1 className="prestamos-title" style={{
                 textAlign: 'center',
                 fontSize: '2.2rem',
                 fontWeight: '700',
@@ -114,8 +155,9 @@ function ReservasPage() {
                 color: '#222',
                 width: '100%',
                 padding: '0 20px'
-            }}>Gestión de Reservas</h1>
-            <div className="reservas-table-wrapper" style={{
+            }}>Gestión de Préstamos</h1>
+            
+            <div className="prestamos-table-wrapper" style={{
                 width: '90%',
                 maxWidth: '100%',
                 background: '#fff',
@@ -126,22 +168,21 @@ function ReservasPage() {
                 boxSizing: 'border-box',
                 position: 'relative',
                 height: '400px'
-            }}>
-                <table className="reservas-table" style={{
+            }}>                <table className="prestamos-table" style={{
                     width: '100%',
                     borderCollapse: 'separate',
                     borderSpacing: '0',
                     backgroundColor: 'white',
                     color: '#333',
-                    tableLayout: 'fixed'
-                }}><thead style={{
+                    tableLayout: 'fixed'                }}><thead style={{
                         position: 'sticky',
                         top: '0',
                         zIndex: '10',
                         width: 'calc(100% - 8px)',
                         display: 'table',
                         tableLayout: 'fixed'
-                    }}><tr><th style={{
+                    }}><tr>
+                            <th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
@@ -149,35 +190,40 @@ function ReservasPage() {
                                 textAlign: 'left',
                                 borderBottom: '2px solid #f0f0f0',
                                 borderTopLeftRadius: '8px',
-                                paddingLeft: '20px'
+                                paddingLeft: '20px',
+                                width: '8%'
                             }}>ID</th><th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
                                 padding: '15px',
                                 textAlign: 'left',
-                                borderBottom: '2px solid #f0f0f0'
-                            }}>Libro</th><th style={{
-                                backgroundColor: '#f0f4f8',
-                                color: '#333',
-                                fontWeight: 'bold',
-                                padding: '15px',
-                                textAlign: 'left',
-                                borderBottom: '2px solid #f0f0f0'
+                                borderBottom: '2px solid #f0f0f0',
+                                width: '12%'
                             }}>Lector</th><th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
                                 padding: '15px',
                                 textAlign: 'left',
-                                borderBottom: '2px solid #f0f0f0'
-                            }}>Fecha Reserva</th><th style={{
+                                borderBottom: '2px solid #f0f0f0',
+                                width: '15%'
+                            }}>F. Préstamo</th><th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
                                 fontWeight: 'bold',
                                 padding: '15px',
                                 textAlign: 'left',
-                                borderBottom: '2px solid #f0f0f0'
+                                borderBottom: '2px solid #f0f0f0',
+                                width: '15%'
+                            }}>F. Devolución</th><th style={{
+                                backgroundColor: '#f0f4f8',
+                                color: '#333',
+                                fontWeight: 'bold',
+                                padding: '15px',
+                                textAlign: 'left',
+                                borderBottom: '2px solid #f0f0f0',
+                                width: '12%'
                             }}>Estado</th><th style={{
                                 backgroundColor: '#f0f4f8',
                                 color: '#333',
@@ -186,68 +232,62 @@ function ReservasPage() {
                                 textAlign: 'right',
                                 borderBottom: '2px solid #f0f0f0',
                                 borderTopRightRadius: '8px',
-                                paddingRight: '35px'
-                            }}>Acciones</th></tr></thead><tbody style={{
+                                paddingRight: '35px',
+                                width: '15%'                            }}>Acciones</th></tr></thead><tbody style={{
                         display: 'block',
                         overflowY: 'auto',
                         overflowX: 'hidden',
                         height: '350px',
                         width: '100%'
-                    }}>
-                        {reservas.map((reserva) => (
-                            <tr 
-                                key={reserva.id_reserva} 
-                                style={{
-                                    display: 'table',
-                                    width: 'calc(100% - 8px)',
-                                    tableLayout: 'fixed'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#f8f9fa';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = 'transparent';
-                                }}
-                            >
+                    }}>{prestamos.map((prestamo) => (
+                            <tr key={prestamo.id_prestamo} style={{
+                                display: 'table',
+                                width: 'calc(100% - 8px)',
+                                tableLayout: 'fixed'
+                            }} onMouseEnter={(e) => {
+                                e.currentTarget.style.backgroundColor = '#f8f9fa';
+                            }} onMouseLeave={(e) => {
+                                e.currentTarget.style.backgroundColor = 'transparent';                            }}>
                                 <td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     paddingLeft: '20px',
                                     borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>{reserva.id_reserva}</td>
-                                <td style={{
+                                    color: '#333',
+                                    width: '8%'
+                                }}>{prestamo.id_prestamo}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>{reserva.titulo_libro || `Libro ID: ${reserva.id_libro}`}</td>
-                                <td style={{
+                                    color: '#333',
+                                    width: '12%'
+                                }}>{prestamo.id_lector}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>{reserva.nombre_lector ? `${reserva.nombre_lector} ${reserva.apellido_lector}` : `Lector ID: ${reserva.id_lector}`}</td>
-                                <td style={{
+                                    color: '#333',
+                                    width: '15%'
+                                }}>{formatearFecha(prestamo.fecha_prestamo)}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>{new Date(reserva.fecha_reserva).toLocaleDateString('es-ES')}</td>
-                                <td style={{
+                                    color: '#333',
+                                    width: '15%'
+                                }}>{formatearFecha(prestamo.fecha_devolucion)}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'left',
                                     borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>{reserva.estado}</td>
-                                <td style={{
+                                    color: '#333',
+                                    width: '12%'
+                                }}>{getEstadoBadge(prestamo.estado)}</td><td style={{
                                     padding: '15px',
                                     textAlign: 'right',
                                     borderBottom: '1px solid #dddddd',
-                                    paddingRight: '10px'
+                                    paddingRight: '10px',
+                                    width: '15%'
                                 }}>
                                     <button 
-                                        className="reservas-button" 
+                                        className="prestamos-button" 
                                         style={{
                                             padding: '8px 50px',
                                             backgroundColor: 'transparent',
@@ -267,13 +307,10 @@ function ReservasPage() {
                                             e.target.style.backgroundColor = 'transparent';
                                             e.target.style.color = '#007bff';
                                         }}
-                                        onClick={() => handleVerReserva(reserva)}
-                                    >
-                                        Ver</button>
-                                </td>
-                            </tr>
-                        ))}
-                        {reservas.length === 0 && (
+                                        onClick={() => handleVerPrestamo(prestamo)}                                    >
+                                        Ver
+                                    </button>                                </td></tr>
+                        ))}{prestamos.length === 0 && (
                             <tr style={{
                                 display: 'table',
                                 width: 'calc(100% - 8px)',
@@ -283,23 +320,20 @@ function ReservasPage() {
                                     textAlign: 'center',
                                     padding: '15px',
                                     borderBottom: '1px solid #dddddd',
-                                    color: '#333'
-                                }}>
-                                    No hay reservas para mostrar.</td>
-                            </tr>
-                        )}
-                    </tbody></table>
+                                    color: '#333'                                }}>
+                                    No hay préstamos para mostrar.                                </td></tr>
+                        )}</tbody></table>
             </div>
-            <div className="crear-reserva-container" style={{
+            
+            <div className="crear-prestamo-container" style={{
                 width: '100%',
                 maxWidth: '100%',
                 textAlign: 'center',
                 margin: '20px auto 0 auto'
             }}>
                 <button 
-                    className="crear-reserva-button" 
+                    className="crear-prestamo-button" 
                     style={{
-                        marginbottom: '20px',
                         display: 'block',
                         margin: '20px auto',
                         padding: '15px 60px',
@@ -325,32 +359,32 @@ function ReservasPage() {
                 </button>
             </div>
             
-            {mostrarDetallesModal && reservaSeleccionada && (
-                <ReservaDetailsModal
-                    reserva={reservaSeleccionada}
+            {mostrarDetallesModal && prestamoSeleccionado && (
+                <PrestamoDetailsModal
+                    prestamo={prestamoSeleccionado}
                     onClose={cerrarDetallesModal}
-                    onEdit={handleEditarReserva}
-                    onDelete={handleEliminarReserva}
+                    onEdit={handleEditarPrestamo}
+                    onDelete={handleEliminarPrestamo}
                 />
             )}
             
             {mostrarCrearModal && (
-                <EditCreateReserva
+                <EditCreatePrestamo
                     onClose={cerrarCrearModal}
-                    onSave={handleCrearReserva}
+                    onSave={handleCrearPrestamo}
                     isEdit={false}
                 />
             )}
             
-            {mostrarEliminarModal && reservaSeleccionada && (
-                <DeleteReservaModal
+            {mostrarEliminarModal && prestamoSeleccionado && (
+                <DeletePrestamoModal
                     onClose={cerrarEliminarModal}
-                    onDelete={handleEliminarReserva}
-                    reserva={reservaSeleccionada}
+                    onDelete={handleEliminarPrestamo}
+                    prestamo={prestamoSeleccionado}
                 />
             )}
         </div>
     );
 }
 
-export default ReservasPage;
+export default PrestamosPage;

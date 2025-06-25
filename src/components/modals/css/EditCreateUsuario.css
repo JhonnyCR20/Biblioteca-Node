@@ -1,0 +1,203 @@
+.usuario-edit-create-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.usuario-edit-create-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.usuario-edit-create-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.usuario-edit-create-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.usuario-edit-create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.usuario-form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.usuario-form-row .usuario-form-group {
+    flex: 1;
+}
+
+.usuario-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.usuario-form-group label {
+    margin-bottom: 3px;
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.usuario-form-control {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.usuario-form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.usuario-form-control.error {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+}
+
+.usuario-form-error-message {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 3px;
+    font-weight: 500;
+}
+
+.usuario-edit-create-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.usuario-guardar-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    flex: 1;
+    height: 42px;
+}
+
+.usuario-guardar-btn:hover {
+    background-color: #0056b3;
+}
+
+.usuario-cancelar-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    flex: 1;
+    height: 42px;
+}
+
+.usuario-cancelar-btn:hover {
+    background-color: #c82333;
+}
+
+/* Estilos específicos para el select */
+select.usuario-form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 12px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Estilos para el campo de contraseña con icono */
+.usuario-password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.usuario-password-input {
+    padding-right: 40px !important;
+}
+
+.usuario-password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.usuario-password-toggle:hover {
+    color: #007bff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .usuario-edit-create-content {
+        width: 95%;
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .usuario-edit-create-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .usuario-form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .usuario-edit-create-actions {
+        flex-direction: column;
+    }
+    
+    .usuario-guardar-btn,
+    .usuario-cancelar-btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
