@@ -133,7 +133,7 @@ function CategoriasPage() {
                 padding: '0 20px'
             }}>Gestión de Categorías</h1>
             <div className="categorias-table-wrapper" style={{
-                width: '70%',
+                width: '85%',
                 maxWidth: '100%',
                 background: '#fff',
                 boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
@@ -233,7 +233,7 @@ function CategoriasPage() {
                                     <button 
                                         className="categorias-button" 
                                         style={{
-                                            padding: '8px 30px',
+                                            padding: '8px 50px',
                                             backgroundColor: 'transparent',
                                             color: '#007bff',
                                             border: '2px solid #007bff',
@@ -267,7 +267,7 @@ function CategoriasPage() {
                         )}</tbody></table>
             </div>
             <div className="crear-categoria-container" style={{
-                width: '100%',
+                width: '85%',
                 maxWidth: '100%',
                 textAlign: 'center',
                 margin: '20px auto 0 auto'
@@ -276,8 +276,8 @@ function CategoriasPage() {
                     className="crear-categoria-button" 
                     style={{
                         display: 'block',
-                        margin: '20px auto',
-                        padding: '15px 60px',
+                        margin: '18px auto',
+                        padding: '20px 100px',
                         backgroundColor: '#007bff',
                         color: 'white',
                         border: 'none',
