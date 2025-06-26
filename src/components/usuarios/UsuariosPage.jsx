@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { obtenerUsuarios, obtenerUsuarioPorId, actualizarUsuario, eliminarUsuario, crearUsuario } from '../../services/usuariosService';
 import UsuarioDetailsModal from '../modals/UsuarioDetailsModal';
-import EditCreateUsuario from '../modals/EditCreateUsuario';
 import DeleteUsuarioModal from '../modals/DeleteUsuarioModal';
+import CrearUsuarioModal from '../modals/CrearUsuarioModal';
+import EditCreateUsuario from '../modals/EditCreateUsuario';
 import './usuarios.css';
 
 function UsuariosPage() {
@@ -15,6 +16,7 @@ function UsuariosPage() {
     const fetchUsuarios = async () => {
         try {
             const data = await obtenerUsuarios();
+            console.log('Datos recibidos del servicio:', data);
             setUsuarios(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error al obtener usuarios:', error);
@@ -25,11 +27,6 @@ function UsuariosPage() {
     useEffect(() => {
         fetchUsuarios();
     }, []);
-
-    // Debug: Mostrar datos en consola
-    useEffect(() => {
-        console.log('Usuarios:', usuarios);
-    }, [usuarios]);
 
     const handleVerUsuario = async (usuario) => {
         try {
@@ -47,12 +44,22 @@ function UsuariosPage() {
         setUsuarioSeleccionado(null);
     };    const cerrarCrearModal = () => {
         setMostrarCrearModal(false);
-        setUsuarioSeleccionado(null); // Asegurar que no queden datos residuales
+        setUsuarioSeleccionado(null);
     };
 
     const abrirCrearModal = () => {
-        setUsuarioSeleccionado(null); // Limpiar cualquier dato previo
-        setMostrarCrearModal(true);
+        // Primero cerrar cualquier otro modal que pueda estar abierto
+        setMostrarDetallesModal(false);
+        setMostrarEliminarModal(false);
+        
+        // Limpiar selección de usuario completamente
+        setUsuarioSeleccionado(null);
+        
+        // Pequeño delay para asegurar que React procese los cambios de estado
+        setTimeout(() => {
+            // Ahora sí abrir el modal de creación
+            setMostrarCrearModal(true);
+        }, 10);
     };
 
     const abrirEliminarModal = (usuario) => {
@@ -65,9 +72,17 @@ function UsuariosPage() {
 
     const handleCrearUsuario = async (nuevoUsuario) => {
         try {
-            await crearUsuario(nuevoUsuario);
+            // Asegurarse de que no haya ID en la creación
+            const datosLimpios = { ...nuevoUsuario };
+            if (datosLimpios.id_usuario) delete datosLimpios.id_usuario;
+            
+            // Crear el usuario
+            await crearUsuario(datosLimpios);
+            
+            // Actualizar lista y cerrar modal
             await fetchUsuarios();
             cerrarCrearModal();
+            
         } catch (error) {
             console.error('Error al crear el usuario:', error);
             alert(`Error al crear el usuario: ${error.message || error}`);
@@ -137,7 +152,20 @@ function UsuariosPage() {
                     </tbody>
                 </table>
             </div>            <div className="crear-usuario-container">
-                <button className="crear-usuario-button" onClick={abrirCrearModal}>Crear</button>
+                <button 
+                    className="crear-usuario-button" 
+                    onClick={() => {
+                        console.log('=== CLIC EN BOTÓN CREAR ===');
+                        console.log('Estado antes del clic:', {
+                            usuarios: usuarios.length,
+                            usuarioSeleccionado,
+                            mostrarCrearModal
+                        });
+                        abrirCrearModal();
+                    }}
+                >
+                    Crear
+                </button>
             </div>
 
             {mostrarDetallesModal && usuarioSeleccionado && (
@@ -149,11 +177,12 @@ function UsuariosPage() {
                 />
             )}
             
+            {/* Modal completamente independiente para crear usuarios */}
             {mostrarCrearModal && (
-                <EditCreateUsuario
+                <CrearUsuarioModal
+                    key={`crear-usuario-independiente-${Date.now()}`}
                     onClose={cerrarCrearModal}
                     onSave={handleCrearUsuario}
-                    isEdit={false}
                 />
             )}
             

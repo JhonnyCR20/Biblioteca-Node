@@ -1,6 +1,6 @@
-/* ===== MODAL DE CREAR/EDITAR USUARIO - ESTILOS ESPECÍFICOS ===== */
+/* ===== MODAL ESPECÍFICO PARA CREAR USUARIO ===== */
 
-.usuario-edit-create-modal {
+.crear-usuario-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     z-index: 1500;
 }
 
-.usuario-edit-create-content {
+.crear-usuario-modal-content {
     background: white;
     border-radius: 8px;
     width: 100%;
@@ -24,38 +24,38 @@
     overflow-y: auto;
 }
 
-.usuario-edit-create-header {
+.crear-usuario-modal-header {
     padding: 15px 20px 0 20px;
     border-bottom: 1px solid #eee;
 }
 
-.usuario-edit-create-header h2 {
+.crear-usuario-modal-header h2 {
     margin: 0 0 15px 0;
     color: #333;
     font-size: 1.4rem;
     text-align: center;
 }
 
-.usuario-modal-form {
+.crear-usuario-form {
     padding: 15px 20px 20px 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.usuario-form-row {
+.crear-usuario-form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px 40px;
 }
 
-.usuario-form-group {
+.crear-usuario-form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
 }
 
-.usuario-form-group label {
+.crear-usuario-form-group label {
     display: block;
     font-weight: 500;
     color: #444;
@@ -63,7 +63,7 @@
     font-size: 14px;
 }
 
-.usuario-form-control {
+.crear-usuario-input {
     width: 100%;
     padding: 8px 10px;
     border: 1px solid #ddd;
@@ -74,24 +74,24 @@
     outline: none;
 }
 
-.usuario-form-control:focus {
+.crear-usuario-input:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
 }
 
-.usuario-form-control.error {
+.crear-usuario-input.error {
     border-color: #dc3545;
     box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.15);
 }
 
-.usuario-error-message {
+.crear-usuario-error {
     color: #dc3545;
     font-size: 12px;
     margin-top: 5px;
 }
 
-/* Estilos específicos para el select del rol */
-select.usuario-form-control {
+/* Estilos específicos para el select */
+select.crear-usuario-input {
     background-color: white;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
     background-position: right 8px center;
@@ -103,16 +103,14 @@ select.usuario-form-control {
     cursor: pointer;
 }
 
-.usuario-modal-actions {
+.crear-usuario-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
     margin-top: 10px;
-    margin-left: 0;
-    margin-right: 0;
 }
 
-.usuario-save-button {
+.crear-usuario-save-btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -121,27 +119,21 @@ select.usuario-form-control {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    margin: 0;
     box-sizing: border-box;
     outline: none;
     transition: background-color 0.3s;
 }
 
-.usuario-save-button:hover {
+.crear-usuario-save-btn:hover {
     background-color: #0056b3;
 }
 
-.usuario-save-button:focus {
+.crear-usuario-save-btn:focus {
     background-color: #0056b3;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-.usuario-save-button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-}
-
-.usuario-cancel-button {
+.crear-usuario-cancel-btn {
     background-color: #dc3545;
     color: white;
     border: none;
@@ -150,55 +142,53 @@ select.usuario-form-control {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-    margin: 0;
     box-sizing: border-box;
     outline: none;
     transition: background-color 0.3s;
 }
 
-.usuario-cancel-button:hover {
+.crear-usuario-cancel-btn:hover {
     background-color: #a71d2a;
 }
 
-.usuario-cancel-button:focus {
+.crear-usuario-cancel-btn:focus {
     background-color: #a71d2a;
     box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-    .usuario-edit-create-content {
+    .crear-usuario-modal-content {
         margin: 10px;
         max-width: calc(100% - 20px);
         max-height: 90vh;
     }
     
-    .usuario-form-row {
+    .crear-usuario-form-row {
         grid-template-columns: 1fr;
         gap: 0;
     }
     
-    .usuario-modal-actions {
+    .crear-usuario-actions {
         grid-template-columns: 1fr;
         gap: 8px;
     }
     
-    .usuario-edit-create-header,
-    .usuario-modal-form {
+    .crear-usuario-modal-header,
+    .crear-usuario-form {
         padding: 15px;
     }
     
-    .usuario-edit-create-header h2 {
+    .crear-usuario-modal-header h2 {
         font-size: 1.3rem;
     }
     
-    .usuario-form-control {
+    .crear-usuario-input {
         font-size: 16px;
     }
     
-    .usuario-save-button,
-    .usuario-cancel-button {
-        width: auto;
+    .crear-usuario-save-btn,
+    .crear-usuario-cancel-btn {
         padding: 12px;
     }
 }

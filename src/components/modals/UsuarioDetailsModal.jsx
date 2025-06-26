@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './css/UsuarioDetailsModal.css';
-import EditCreateUsuario from './EditCreateUsuario';
 import DeleteUsuarioModal from './DeleteUsuarioModal';
+import EditCreateUsuario from './EditCreateUsuario';
 import editarIcon from '../../assets/editar.svg';
 
 const UsuarioDetailsModal = ({ usuario, onClose, onEdit, onDelete }) => {
@@ -9,8 +9,12 @@ const UsuarioDetailsModal = ({ usuario, onClose, onEdit, onDelete }) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const modalRef = useRef(null);
 
-    const handleEditClick = () => setIsEditModalOpen(true);
-    const handleCloseEditModal = () => setIsEditModalOpen(false);
+    const handleEditClick = () => {
+        setIsEditModalOpen(true);
+    };
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+    };
     const handleCloseDeleteModal = () => setIsDeleteModalOpen(false);
 
     const handleBackdropClick = (e) => {
@@ -48,6 +52,7 @@ const UsuarioDetailsModal = ({ usuario, onClose, onEdit, onDelete }) => {
 
             {isEditModalOpen && (
                 <EditCreateUsuario
+                    key={`editar-usuario-modal-${usuario?.id_usuario}-${Date.now()}`}
                     initialData={usuario}
                     onClose={() => {
                         handleCloseEditModal();

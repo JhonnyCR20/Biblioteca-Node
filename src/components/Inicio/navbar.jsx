@@ -27,52 +27,52 @@ const Navbar = () => {
         </div>
 
         <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-          <li className="nav-item">
+          <li key="nav-autores" className="nav-item">
             <Link to="/autores" className="nav-link" onClick={closeMenu}>
               Autores
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-libros" className="nav-item">
             <Link to="/libros" className="nav-link" onClick={closeMenu}>
               Libros
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-editoriales" className="nav-item">
             <Link to="/editoriales" className="nav-link" onClick={closeMenu}>
               Editoriales
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-reservas" className="nav-item">
             <Link to="/reservas" className="nav-link" onClick={closeMenu}>
               Reservas
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-lectores" className="nav-item">
             <Link to="/lectores" className="nav-link" onClick={closeMenu}>
               Lectores
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-multas" className="nav-item">
             <Link to="/multas" className="nav-link" onClick={closeMenu}>
               Multas
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-prestamos" className="nav-item">
             <Link to="/prestamos" className="nav-link" onClick={closeMenu}>
               Préstamos
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-categorias" className="nav-item">
             <Link to="/categorias" className="nav-link" onClick={closeMenu}>
               Categorias
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-historial" className="nav-item">
             <Link to="/historial" className="nav-link" onClick={closeMenu}>
               Historial
             </Link>
           </li>
-          <li className="nav-item">
+          <li key="nav-usuarios" className="nav-item">
             <Link to="/usuarios" className="nav-link" onClick={closeMenu}>
               Usuarios
             </Link>

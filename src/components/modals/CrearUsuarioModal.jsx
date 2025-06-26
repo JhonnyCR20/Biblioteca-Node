@@ -1,29 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
-import './css/EditCreateUsuario.css';
+import React, { useState, useRef } from 'react';
+import './css/CrearUsuarioModal.css';
 
-const EditCreateUsuario = ({ initialData, onClose, onSave, isEdit = false }) => {
+const CrearUsuarioModal = ({ onClose, onSave }) => {
+    // Generar IDs únicos para evitar autocompletado del navegador
+    const uniqueId = Math.random().toString(36).substr(2, 9);
+    
+    // Estado completamente independiente, sin initialData
     const [formData, setFormData] = useState({
-        nombre: initialData?.nombre || '',
-        correo: initialData?.correo || '',
-        rol: initialData?.rol || 'lector',
+        nombre: '',
+        correo: '',
+        rol: 'lector',
         password: ''
     });
     
     const [errors, setErrors] = useState({});
     const modalRef = useRef(null);
-
-    // Resetear el formulario cuando initialData cambie
-    useEffect(() => {
-        const newFormData = {
-            nombre: initialData?.nombre || '',
-            correo: initialData?.correo || '',
-            rol: initialData?.rol || 'lector',
-            password: ''
-        };
-        
-        setFormData(newFormData);
-        setErrors({}); // Limpiar errores también
-    }, [initialData]);
 
     const handleBackdropClick = (e) => {
         if (modalRef.current && e.target === modalRef.current) {
@@ -52,18 +43,16 @@ const EditCreateUsuario = ({ initialData, onClose, onSave, isEdit = false }) => 
             newErrors.correo = 'El correo no tiene un formato válido';
         }
         
+        // Validar contraseña
+        if (!formData.password) {
+            newErrors.password = 'La contraseña es obligatoria';
+        } else if (formData.password.length < 6) {
+            newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
+        }
+        
         // Validar rol
         if (!['admin', 'bibliotecario', 'lector'].includes(formData.rol)) {
             newErrors.rol = 'Debe seleccionar un rol válido';
-        }
-        
-        // Validar contraseña (solo si es crear o si se está cambiando)
-        if (!isEdit || formData.password) {
-            if (!formData.password) {
-                newErrors.password = 'La contraseña es obligatoria';
-            } else if (formData.password.length < 6) {
-                newErrors.password = 'La contraseña debe tener al menos 6 caracteres';
-            }
         }
         
         setErrors(newErrors);
@@ -99,43 +88,39 @@ const EditCreateUsuario = ({ initialData, onClose, onSave, isEdit = false }) => 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         if (validateForm()) {
-            // Preparar datos para enviar
+            // Preparar datos para enviar (convertir password a clave para el backend)
             const dataToSend = {
                 nombre: formData.nombre.trim(),
                 correo: formData.correo.trim(),
-                rol: formData.rol
+                rol: formData.rol,
+                clave: formData.password
             };
-            
-            // Solo incluir contraseña si se proporcionó (crear o cambiar)
-            // Convertir password a clave para el backend
-            if (formData.password) {
-                dataToSend.clave = formData.password;
-            }
             
             onSave(dataToSend);
         }
     };
 
     return (
-        <div className="usuario-edit-create-modal" ref={modalRef} onClick={handleBackdropClick}>
-            <div className="usuario-edit-create-content">
-                <div className="usuario-edit-create-header">
-                    <h2>{isEdit ? 'Editar Usuario' : 'Crear Usuario'}</h2>
+        <div className="crear-usuario-modal-overlay" ref={modalRef} onClick={handleBackdropClick}>
+            <div className="crear-usuario-modal-content">
+                <div className="crear-usuario-modal-header">
+                    <h2>Crear Usuario</h2>
                 </div>
                 
-                <form onSubmit={handleSubmit} className="usuario-modal-form" autoComplete="off">
+                <form onSubmit={handleSubmit} className="crear-usuario-form" autoComplete="off">
                     {/* Primera fila: Nombre y Correo */}
-                    <div className="usuario-form-row">
-                        <div className="usuario-form-group">
-                            <label htmlFor="nombre">Nombre:</label>
+                    <div className="crear-usuario-form-row">
+                        <div className="crear-usuario-form-group">
+                            <label htmlFor={`nombre-${uniqueId}`}>Nombre:</label>
                             <input
                                 type="text"
-                                id="nombre"
+                                id={`nombre-${uniqueId}`}
                                 name="nombre"
                                 value={formData.nombre}
                                 onChange={handleChange}
-                                className={errors.nombre ? 'usuario-form-control error' : 'usuario-form-control'}
+                                className={errors.nombre ? 'crear-usuario-input error' : 'crear-usuario-input'}
                                 placeholder="Ingrese el nombre completo"
                                 maxLength="30"
                                 autoComplete="off"
@@ -143,75 +128,73 @@ const EditCreateUsuario = ({ initialData, onClose, onSave, isEdit = false }) => 
                                 autoCapitalize="off"
                                 spellCheck="false"
                             />
-                            {errors.nombre && <div className="usuario-error-message">{errors.nombre}</div>}
+                            {errors.nombre && <div className="crear-usuario-error">{errors.nombre}</div>}
                         </div>
                         
-                        <div className="usuario-form-group">
-                            <label htmlFor="correo">Correo:</label>
+                        <div className="crear-usuario-form-group">
+                            <label htmlFor={`correo-${uniqueId}`}>Correo:</label>
                             <input
                                 type="email"
-                                id="correo"
+                                id={`correo-${uniqueId}`}
                                 name="correo"
                                 value={formData.correo}
                                 onChange={handleChange}
-                                className={errors.correo ? 'usuario-form-control error' : 'usuario-form-control'}
+                                className={errors.correo ? 'crear-usuario-input error' : 'crear-usuario-input'}
                                 placeholder="Ingrese el correo electrónico"
                                 autoComplete="off"
                                 autoCorrect="off"
                                 autoCapitalize="off"
                                 spellCheck="false"
                             />
-                            {errors.correo && <div className="usuario-error-message">{errors.correo}</div>}
+                            {errors.correo && <div className="crear-usuario-error">{errors.correo}</div>}
                         </div>
                     </div>
                     
                     {/* Segunda fila: Contraseña y Rol */}
-                    <div className="usuario-form-row">
-                        <div className="usuario-form-group">
-                            <label htmlFor="password">
-                                {isEdit ? 'Nueva Contraseña (opcional):' : 'Contraseña:'}
-                            </label>
+                    <div className="crear-usuario-form-row">
+                        <div className="crear-usuario-form-group">
+                            <label htmlFor={`password-${uniqueId}`}>Contraseña:</label>
                             <input
                                 type="password"
-                                id="password"
+                                id={`password-${uniqueId}`}
                                 name="password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className={errors.password ? 'usuario-form-control error' : 'usuario-form-control'}
-                                placeholder={isEdit ? "Dejar vacío para mantener actual" : "Ingrese la contraseña"}
+                                className={errors.password ? 'crear-usuario-input error' : 'crear-usuario-input'}
+                                placeholder="Ingrese la contraseña"
                                 minLength="6"
                                 autoComplete="new-password"
                                 autoCorrect="off"
                                 autoCapitalize="off"
                                 spellCheck="false"
                             />
-                            {errors.password && <div className="usuario-error-message">{errors.password}</div>}
+                            {errors.password && <div className="crear-usuario-error">{errors.password}</div>}
                         </div>
                         
-                        <div className="usuario-form-group">
-                            <label htmlFor="rol">Rol:</label>
+                        <div className="crear-usuario-form-group">
+                            <label htmlFor={`rol-${uniqueId}`}>Rol:</label>
                             <select
-                                id="rol"
+                                id={`rol-${uniqueId}`}
                                 name="rol"
                                 value={formData.rol}
                                 onChange={handleChange}
-                                className={errors.rol ? 'usuario-form-control error' : 'usuario-form-control'}
+                                className={errors.rol ? 'crear-usuario-input error' : 'crear-usuario-input'}
                                 autoComplete="off"
                             >
                                 <option value="lector">Lector</option>
                                 <option value="bibliotecario">Bibliotecario</option>
                                 <option value="admin">Administrador</option>
                             </select>
-                            {errors.rol && <div className="usuario-error-message">{errors.rol}</div>}
+                            {errors.rol && <div className="crear-usuario-error">{errors.rol}</div>}
                         </div>
                     </div>
                     
                     {/* Tercera fila: Botones */}
-                    <div className="usuario-modal-actions">
-                        <button type="submit" className="usuario-save-button">
-                            {isEdit ? 'Actualizar' : 'Crear'}
+                    <div className="crear-usuario-actions">
+                        <button type="submit" className="crear-usuario-save-btn">
+                            Crear
                         </button>
-                        <button type="button" onClick={onClose} className="usuario-cancel-button">
+                        <button type="button" onClick={onClose} className="crear-usuario-cancel-btn">
                             Cancelar
                         </button>
                     </div>
@@ -221,4 +204,4 @@ const EditCreateUsuario = ({ initialData, onClose, onSave, isEdit = false }) => 
     );
 };
 
-export default EditCreateUsuario;
+export default CrearUsuarioModal;
