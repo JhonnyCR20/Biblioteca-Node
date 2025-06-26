@@ -3,6 +3,7 @@ import { obtenerGeneros, obtenerGeneroPorId, actualizarGenero, eliminarGenero, c
 import GeneroDetailsModal from '../modals/GeneroDetailsModal';
 import EditCreateGenero from '../modals/EditCreateGenero';
 import DeleteGeneroModal from '../modals/DeleteGeneroModal';
+import ErrorCategoriaModal from '../modals/ErrorCategoriaModal';
 //import './categorias.css';
 
 function CategoriasPage() {
@@ -11,6 +12,8 @@ function CategoriasPage() {
     const [mostrarDetallesModal, setMostrarDetallesModal] = useState(false);
     const [mostrarCrearModal, setMostrarCrearModal] = useState(false);
     const [mostrarEliminarModal, setMostrarEliminarModal] = useState(false);
+    const [mostrarErrorModal, setMostrarErrorModal] = useState(false);
+    const [errorCategoriaNombre, setErrorCategoriaNombre] = useState('');
 
     const fetchGeneros = async () => {
         try {
@@ -55,6 +58,11 @@ function CategoriasPage() {
         setMostrarEliminarModal(false);
     };
 
+    const cerrarErrorModal = () => {
+        setMostrarErrorModal(false);
+        setErrorCategoriaNombre('');
+    };
+
     const handleCrearGenero = async (nuevoGenero) => {
         try {
             await crearGenero(nuevoGenero);
@@ -87,7 +95,17 @@ function CategoriasPage() {
             cerrarDetallesModal();
         } catch (error) {
             console.error('Error al eliminar el género:', error);
-            alert(`Error al eliminar el género: ${error.message || error}`);
+            
+            // Verificar si es un error de integridad referencial
+            if (error.errorType === 'foreign_key_constraint') {
+                // Mostrar modal de error específico
+                setErrorCategoriaNombre(generoSeleccionado.nombre || 'la categoría');
+                setMostrarErrorModal(true);
+                cerrarEliminarModal();
+            } else {
+                // Mostrar alerta genérica para otros errores
+                alert(`Error al eliminar el género: ${error.message || error}`);
+            }
         }
     };    return (
         <div className="categorias-container" style={{
@@ -303,6 +321,13 @@ function CategoriasPage() {
                     onClose={cerrarEliminarModal}
                     onDelete={handleEliminarGenero}
                     genero={generoSeleccionado}
+                />
+            )}
+            
+            {mostrarErrorModal && (
+                <ErrorCategoriaModal
+                    onClose={cerrarErrorModal}
+                    nombreCategoria={errorCategoriaNombre}
                 />
             )}
         </div>

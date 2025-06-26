@@ -96,8 +96,8 @@ body, html {
 .usuarios-table th:nth-child(5) {
     border-top-right-radius: 8px;
     width: 17%;
-    text-align: right;
-    padding-right: 35px;
+    text-align: center;
+    padding-right: 20px;
 }
 
 .usuarios-table tbody {
@@ -108,9 +108,15 @@ body, html {
     width: 100%;
 }
 
-.usuarios-table tr {
+.usuarios-table thead tr {
     display: table;
-    width: calc(100% - 8px);
+    width: 100%;
+    table-layout: fixed;
+}
+
+.usuarios-table tbody tr {
+    display: table;
+    width: calc(100% - 8px); /* Resta el ancho del scrollbar para alinear con el encabezado */
     table-layout: fixed;
 }
 
@@ -130,23 +136,28 @@ body, html {
     text-align: center;
     padding-left: 20px;
     font-weight: 600;
+    width: 8%;
 }
 
 .usuarios-table td:nth-child(2) {
     text-align: left;
+    width: 25%;
 }
 
 .usuarios-table td:nth-child(3) {
     text-align: left;
+    width: 30%;
 }
 
 .usuarios-table td:nth-child(4) {
     text-align: left;
+    width: 20%;
 }
 
 .usuarios-table td:nth-child(5) {
-    text-align: right;
-    padding-right: 10px;
+    text-align: center;
+    padding-right: 20px;
+    width: 17%;
 }
 
 .usuarios-button {

@@ -85,24 +85,44 @@ export async function eliminarGenero(id) {
             method: 'DELETE',
         });
         
-        if (!response.ok) {
+        // Verificar si hay contenido antes de intentar parsear JSON
+        const text = await response.text();
+        let data = null;
+        
+        if (text) {
+            try {
+                data = JSON.parse(text);
+            } catch (jsonError) {
+                console.warn('Respuesta no es JSON válido:', text);
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+                return { status: 'success', message: 'Categoría eliminada' };
+            }
+        }
+        
+        // Si hay datos de respuesta, verificar el status
+        if (data) {
+            if (data.status === 'error') {
+                // Crear error personalizado con información del backend
+                const error = new Error(data.message);
+                error.errorType = data.error_type;
+                error.responseData = data;
+                throw error;
+            }
+            return data;
+        }
+        
+        // Si no hay datos pero la respuesta es exitosa
+        if (response.ok) {
+            return { status: 'success', message: 'Categoría eliminada' };
+        } else {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
         
-        // Verificar si hay contenido antes de intentar parsear JSON
-        const text = await response.text();
-        if (!text) {
-            return { status: 'success', message: 'Categoría eliminada' };
-        }
-        
-        try {
-            return JSON.parse(text);
-        } catch (jsonError) {
-            console.warn('Respuesta no es JSON válido:', text);
-            return { status: 'success', message: 'Categoría eliminada' };
-        }
     } catch (error) {
         console.error('Error al eliminar el género:', error);
-        throw new Error('Error al eliminar el género: ' + error.message);
+        // Re-lanzar el error con la información original
+        throw error;
     }
 }
